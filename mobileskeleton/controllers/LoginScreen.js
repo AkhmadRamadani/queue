@@ -35,6 +35,8 @@ export default class LoginScreen extends React.Component {
         return true
     }
 
+    //IKI SING DIGAWE NDEK ONPRESS E BUTTON NDEK FIRST SCREEN
+    //PAHAMI SEK
     loginHandler = async () => {
         this.props.navigation.push("Second");
     }

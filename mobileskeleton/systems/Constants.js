@@ -12,6 +12,7 @@ const DefaultTheme = {
     AppStatusBarStyle: 'light-content',
 
     AppObjectSpacing: 8, // Spacing
+    AppInputHeightDefault: 48,
 
     AppFontFace: 'Poppins', // Main Font Familiy
     AppFontBlackColor: '#444444',
