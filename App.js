@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { MainDrawer } from "./mobileskeleton/systems/Config";
+import { MainDrawer } from "./Queue/systems/Config";
 
 export default class App extends Component {
 

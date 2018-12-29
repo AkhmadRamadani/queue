@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableHighlight } from 'react-native';
 import { GlobalStyles } from '../../assets/GlobalStyles';
 import { AppConstants } from '../../systems/Constants';
 
@@ -12,18 +12,21 @@ export default class Button extends Component {
 
     render() {
         return (
-            <TouchableOpacity
+            <TouchableHighlight
                 style={[
                     GlobalStyles.Container,
                     {
-                        backgroundColor: this.props.backgroundColor != undefined ? this.props.backgroundColor : AppConstants.ActiveTheme.AppMainButtonColor,
+                        backgroundColor: this.props.backgroundColor != undefined ? this.props.backgroundColor :
+                         AppConstants.ActiveTheme.AppButtonColorBlueNavy,
                         width: this.props.width,
                         height: this.props.type == 'box' ? this.props.width : this.props.height != undefined ? this.props.height : AppConstants.ActiveTheme.AppInputHeightDefault,
                         borderRadius: this.props.radius,
+                        borderColor : '#000',
                         alignItems: 'center'
-                    }
+                    },  this.props.style
                 ]}
-                onPress={() => this.props.onPress()}>
+                onPress={() => this.props.onPress()}
+                disabled={this.props.disabled}>
 
                 <Text
                     style={[
@@ -36,7 +39,7 @@ export default class Button extends Component {
                     {this.props.label}
                 </Text>
 
-            </TouchableOpacity>
+            </TouchableHighlight>
         );
     }
 }

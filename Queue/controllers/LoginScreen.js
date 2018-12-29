@@ -40,9 +40,12 @@ export default class LoginScreen extends React.Component {
     loginHandler = async () => {
         this.props.navigation.push("Second");
     }
+    register = async () => {
+        this.props.navigation.push("RegisterView");
+    }
 
     render = () => {
-        return <FirstScreen onPress={()=> this.loginHandler()} />
+        return <FirstScreen onPress={()=> this.loginHandler()} onPressRegister={()=> this.register()} />
     }
 
 

@@ -1,4 +1,4 @@
-package com.mobileskeleton;
+package com.Queue;
 
 import android.app.Application;
 

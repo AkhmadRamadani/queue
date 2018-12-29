@@ -7,7 +7,7 @@ const DefaultTheme = {
     AppBottomTabBackgroundColor: '#f7f7f7',
     AppPrimaryColor: '#0099CC', // Header Background
     AppMainButtonColor: '#F5BB41',
-
+    AppButtonColorBlueNavy : "#1C3144",
     AppStatusBarColor: '#ed5564', // 
     AppStatusBarStyle: 'light-content',
 

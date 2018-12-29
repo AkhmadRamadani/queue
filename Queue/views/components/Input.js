@@ -1,8 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, TextInput, View, Text } from 'react-native';
+import { TouchableOpacity, TextInput, View, Text ,Image, Dimensions} from 'react-native';
 
 import { AppConstants } from '../../systems/Constants'
 import { GlobalStyles } from '../../assets/GlobalStyles'
+import ImageView from './ImageView'
 
 export default class Input extends React.Component {
 
@@ -12,8 +13,22 @@ export default class Input extends React.Component {
 
     render() {
         return (
-            <View style={[this.props.wrapperStyle]}>
-
+            <View style={[this.props.wrapperStyle,{
+                borderRadius: this.props.radius != undefined ? this.props.radius : 24,
+                borderStyle : "solid",
+                borderWidth : 1,
+                flexDirection : 'row',
+                borderColor: this.props.borderColor != undefined ? this.props.borderColor : '#707070',
+                paddingHorizontal: 10,
+                backgroundColor: this.props.backgroundColor != undefined ?
+                 this.props.backgroundColor : "transparent",
+                marginBottom: 2 * AppConstants.ActiveTheme.AppObjectSpacing},this.props.style]}>
+                    <View style={{justifyContent : 'center', alignItems:'center',
+                        marginHorizontal : AppConstants.ActiveTheme.AppObjectSpacing}}>
+                        <ImageView 
+                            style={{width : 25, height : 25}}
+                            imageSrc={this.props.ImageSrc} />
+                    </View>
                     <TextInput
                         style={[
                             GlobalStyles.Input,
@@ -22,12 +37,7 @@ export default class Input extends React.Component {
                             {
                                 lineHeight: this.props.height,
                                 height: this.props.height,
-                                borderRadius: this.props.radius != undefined ? this.props.radius : 0,
-                                borderColor: this.props.borderColor != undefined ? this.props.borderColor : 'transparent',
-                                paddingHorizontal: 20,
-                                backgroundColor: this.props.backgroundColor != undefined ? this.props.backgroundColor : AppConstants.ActiveTheme.AppSecondaryBackgroundColor,
-                                fontSize: this.props.fontSize,
-                                marginBottom: 2 * AppConstants.ActiveTheme.AppObjectSpacing
+                                fontSize: this.props.fontSize
                             },
                             this.props.style,
                         ]}

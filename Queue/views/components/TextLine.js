@@ -34,13 +34,17 @@ export default class TextLine extends React.Component {
     render = () => {
 
         return <View style={[{ 
-            flex: 1, 
-            justifyContent: 'center', }, this.props.style]}>
+            justifyContent: 'flex-start', }, this.props.style]}>
 
-            <Text style={[this.props.type == 'p' ? GlobalStyles.FontRegular : GlobalStyles.FontBold, this.type, this.props.textStyle]}>
+            <Text
+             style={[this.props.type == 'p' ? GlobalStyles.FontRegular : GlobalStyles.FontBold, 
+             this.type, this.props.textStyle]} 
+             onPress={() => this.props.onPress()}>
                 {this.label.map((item, index) => {
                     if (item != '')
-                    return <Text key={index}>{item}<Text style={{ color: AppConstants.ActiveTheme.AppFontHeadingColor, }}>{this.props.highlight}</Text></Text> 
+                    return <Text key={index}>{item}
+                    <Text style={{ color: AppConstants.ActiveTheme.AppFontHeadingColor, }}>
+                    {this.props.highlight}</Text></Text> 
                 })}
             </Text>
 

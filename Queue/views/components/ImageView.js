@@ -20,7 +20,9 @@ export default class ImageView extends Component {
                             width: this.props.width,
                             height: this.props.type === 'box' ? this.props.width : this.props.height,
                             resizeMode: 'contain',
-                            borderRadius: this.props.radius
+                            borderRadius: this.props.radius,
+                            justifyContent : "center",
+                            alignItems : "center"
                         }, this.props.style
                     ]} />
             </View>
