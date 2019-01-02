@@ -43,9 +43,15 @@ export default class LoginScreen extends React.Component {
     register = async () => {
         this.props.navigation.push("RegisterView");
     }
+    forgot = async () => {
+        this.props.navigation.push("ForgotView");
+    }
 
     render = () => {
-        return <FirstScreen onPress={()=> this.loginHandler()} onPressRegister={()=> this.register()} />
+        return <FirstScreen 
+            onPress={()=> this.loginHandler()} 
+            onPressRegister={()=> this.register()}
+            onPressForgot={()=> this.forgot()} />
     }
 
 

@@ -48,14 +48,21 @@ export default class RegisterScreenView extends Component {
                         secureMode={true} />
                     <View style={{ marginTop : 2 * AppConstants.ActiveTheme.AppObjectSpacing,
                             justifyContent : "flex-start", alignItems:"center"}}>
-                        <Button
-                            style={{borderRadius : 4 * AppConstants.ActiveTheme.AppObjectSpacing}}
-                            width={Dimensions.get('window').width - (4 * AppConstants.ActiveTheme.AppObjectSpacing)}
-                            height={AppConstants.ActiveTheme.AppInputHeightDefault + (1* AppConstants.ActiveTheme.AppObjectSpacing)}
-                            label={'Daftar'}
-                            onPress={()=>this.props.onPress()}
-                            radius={AppConstants.ActiveTheme.AppObjectSpacing} />
-                    </View>  
+                    <Button
+                        style={{borderRadius : 4 * AppConstants.ActiveTheme.AppObjectSpacing}}
+                        width={Dimensions.get('window').width - (4 * AppConstants.ActiveTheme.AppObjectSpacing)}
+                        height={AppConstants.ActiveTheme.AppInputHeightDefault + (1* AppConstants.ActiveTheme.AppObjectSpacing)}
+                        label={'Daftar'}
+                        onPress={()=>this.props.onPressDaftar()}
+                        radius={AppConstants.ActiveTheme.AppObjectSpacing} />
+                    <View style={{marginTop : 2 * AppConstants.ActiveTheme.AppObjectSpacing, justifyContent:"center" , alignItems :"center"}}>
+                        <TextLine
+                            label={'Sudah punya akun ? Masuk !!!'}
+                            type={'h6'}
+                            onPress={()=>this.props.onPressMasuk()}>
+                        </TextLine>
+                    </View>
+                </View>
                 </View>
             </View>
         )

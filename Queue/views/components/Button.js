@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableHighlight } from 'react-native';
+import { Text, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { GlobalStyles } from '../../assets/GlobalStyles';
 import { AppConstants } from '../../systems/Constants';
 
@@ -12,7 +12,7 @@ export default class Button extends Component {
 
     render() {
         return (
-            <TouchableHighlight
+            <TouchableOpacity
                 style={[
                     GlobalStyles.Container,
                     {
@@ -26,7 +26,8 @@ export default class Button extends Component {
                     },  this.props.style
                 ]}
                 onPress={() => this.props.onPress()}
-                disabled={this.props.disabled}>
+                disabled={this.props.disabled}
+                >
 
                 <Text
                     style={[
@@ -38,8 +39,7 @@ export default class Button extends Component {
                     ]}>
                     {this.props.label}
                 </Text>
-
-            </TouchableHighlight>
+            </TouchableOpacity>
         );
     }
 }

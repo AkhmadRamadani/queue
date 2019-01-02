@@ -14,21 +14,13 @@ export default class Input extends React.Component {
     render() {
         return (
             <View style={[this.props.wrapperStyle,{
-                borderRadius: this.props.radius != undefined ? this.props.radius : 24,
                 borderStyle : "solid",
-                borderWidth : 1,
+                borderBottomWidth : 2,
                 flexDirection : 'row',
                 borderColor: this.props.borderColor != undefined ? this.props.borderColor : '#707070',
-                paddingHorizontal: 10,
                 backgroundColor: this.props.backgroundColor != undefined ?
                  this.props.backgroundColor : "transparent",
                 marginBottom: 2 * AppConstants.ActiveTheme.AppObjectSpacing},this.props.style]}>
-                    <View style={{justifyContent : 'center', alignItems:'center',
-                        marginHorizontal : AppConstants.ActiveTheme.AppObjectSpacing}}>
-                        <ImageView 
-                            style={{width : 25, height : 25}}
-                            imageSrc={this.props.ImageSrc} />
-                    </View>
                     <TextInput
                         style={[
                             GlobalStyles.Input,

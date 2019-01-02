@@ -16,48 +16,55 @@ export default class FirstScreenView extends Component {
 
     render() {
         return <View style={[GlobalStyles.Wrapper, { paddingHorizontal: 2 * AppConstants.ActiveTheme.AppObjectSpacing }]}>
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, justifyContent: 'center' }}>
+               
                 <View style={{alignItems:"center"}}>
                     <ImageView
-                        imageSrc={require('../assets/images/Label.png')}
-                        width={Dimensions.get('window').width / 2}
+                        imageSrc={require('../assets/images/NEW.png')}
+                        width={Dimensions.get('window').width / 1.5}
                         height={10 * AppConstants.ActiveTheme.AppObjectSpacing} 
-                        style={{marginVertical : 3 * AppConstants.ActiveTheme.AppObjectSpacing}}/>
+                        style={{marginVertical : AppConstants.ActiveTheme.AppObjectSpacing }}
+                        />
+                </View>                
+
+                <View style={{justifyContent:"center" , alignItems :"center", marginBottom: 2 * AppConstants.ActiveTheme.AppObjectSpacing}}>
+                     <TextLine
+                        label={'Masukkan kata sandi baru anda'}
+                        type={'h6'}>
+                    </TextLine>
+
+                    <TextLine
+                        label={'Selanjutnya anda akan login menggunakan'}
+                        type={'h6'}>
+                    </TextLine>
+
+                    <TextLine
+                        label={'Kata sandi anda yang baru'}
+                        type={'h6'}>
+                    </TextLine>                        
                 </View>
-                <Input
-                    ImageSrc={require('../assets/images/mail.png')}
-                    style={{borderRadius : 3 * AppConstants.ActiveTheme.AppObjectSpacing}}
-                    placeholder={'Email'}
-                    radius={AppConstants.ActiveTheme.AppObjectSpacing} />
+
                 <Input
                     ImageSrc={require('../assets/images/lock.png')}
                     style={{borderRadius : 3 * AppConstants.ActiveTheme.AppObjectSpacing}}
-                    placeholder={'Kata sandi'}
+                    placeholder={'Kata sandi baru'}
                     radius={AppConstants.ActiveTheme.AppObjectSpacing}
                     secureMode={true} />
+                <Input
+                    ImageSrc={require('../assets/images/lock.png')}
+                    style={{borderRadius : 3 * AppConstants.ActiveTheme.AppObjectSpacing}}
+                    placeholder={'Ketik ulang kata sandi baru'}
+                    radius={AppConstants.ActiveTheme.AppObjectSpacing}
+                    secureMode={true} />    
                     
-                <View style={{ marginTop : 2 * AppConstants.ActiveTheme.AppObjectSpacing,
-                            justifyContent : "flex-start", alignItems:"center"}}>
+                <View style={{justifyContent : "flex-start", alignItems:"center"}}>
                     <Button
                         style={{borderRadius : 4 * AppConstants.ActiveTheme.AppObjectSpacing}}
                         width={Dimensions.get('window').width - (4 * AppConstants.ActiveTheme.AppObjectSpacing)}
                         height={AppConstants.ActiveTheme.AppInputHeightDefault + (1* AppConstants.ActiveTheme.AppObjectSpacing)}
-                        label={'Masuk'}
-                        onPress={()=>this.props.onPress()}
-                        radius={AppConstants.ActiveTheme.AppObjectSpacing} />
-                    <View style={{marginTop : 2 * AppConstants.ActiveTheme.AppObjectSpacing, justifyContent:"center" , alignItems :"center"}}>
-                        <TextLine
-                            label={'Belum Punya Akun ? Daftar !!!'}
-                            type={'h6'}
-                            onPress={()=>this.props.onPressRegister()}>
-                        </TextLine>
-                        <TextLine
-                            style={{marginTop : 1 * AppConstants.ActiveTheme.AppObjectSpacing}}
-                            label={'Lupa Kata sandi ?'}
-                            onPress={()=>this.props.onPressForgot()}
-                            type={'h6'}>
-                        </TextLine>
-                    </View>
+                        label={'UBAH'}
+                        onPress={()=>this.props.onPressNewPass()}
+                        radius={AppConstants.ActiveTheme.AppObjectSpacing} /> 
                 </View>
             </View>
         </View>

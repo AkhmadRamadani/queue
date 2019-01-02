@@ -1,4 +1,4 @@
-import RegisterScreenView from '../views/RegisterScreenView'
+import RegScreen from '../views/RegisterScreenView'
 import React from 'react';
 export default class RegisterScreen extends React.Component {
     constructor(props) {
@@ -10,10 +10,16 @@ export default class RegisterScreen extends React.Component {
 
         this.content = [];
     }
-    disableButton = () =>{
-        
+    
+    daftar = async () => {
+        this.props.navigation.push("First");
     }
+
+    masuk = async () => {
+        this.props.navigation.push("LoginView");
+    }
+
     render = () => {
-        return <RegisterScreenView />
+        return <RegScreen onPressDaftar={()=> this.daftar()} onPressMasuk={()=> this.masuk()}/>
     }
 }
