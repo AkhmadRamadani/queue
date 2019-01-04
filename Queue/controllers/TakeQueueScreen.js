@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MainScreenView from "../views/MainScreenView";
+import TakeQueueScreenView from "../views/TakeQueueScreenView";
 
 export default class MainScreen extends React.Component {
 
@@ -14,12 +14,12 @@ export default class MainScreen extends React.Component {
         this.content = [];
     }
 
-    Click = async () => {
-        this.props.navigation.push("Take")
+    back = async () => {
+        this.props.navigation.goBack(null);
     }
 
     render = () => {
-        return <MainScreenView onPressClick={() => this.Click()}/>
+        return <TakeQueueScreenView onPressBack={()=> this.back()}/>
     }
 
 

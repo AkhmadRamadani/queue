@@ -14,9 +14,12 @@ export default class MyPlaceScreen extends React.Component {
         this.content = [];
     }
 
+    process = async () => {
+        this.props.navigation.push("Process")
+    }
 
     render = () => {
-        return <MyPlaceScreenView />
+        return <MyPlaceScreenView onPressProcess={()=> this.process()}/>
     }
 
 

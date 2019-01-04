@@ -14,7 +14,14 @@ import NewPasswordScreen from '../controllers/NewPasswordScreen'
 import MainScreen from '../controllers/MainScreen'
 import MyQueueScreen from '../controllers/MyQueueScreen'
 import MyPlaceScreen from '../controllers/MyPlaceScreen'
+import MakePlaceScreen from '../controllers/MakePlaceScreen'
+import EmptyMyPlaceScreen from '../controllers/EmptyMyPlaceScreen'
 import EditProfileScreen from '../controllers/EditProfileScreen'
+import OnProcessScreen from '../controllers/OnProcessScreen'
+import ProfilScreen from '../controllers/ProfileScreen'
+import TakeQueueScreen from '../controllers/TakeQueueScreen'
+
+import ImageView from '../views/components/ImageView'
 
 // ********************************************************************************
 // * APP Config
@@ -29,29 +36,60 @@ export const AppConfig = {
 const tabNavigator = createBottomTabNavigator({
         Main : {
             screen : MainScreen,
+            navigationOptions:{
+                tabBarIcon: ({tintColor})=>(
+                    <ImageView
+                        imageSrc={require('../assets/images/home.png')}
+                        width={25}
+                        height={25} />
+                ),
+            },
         },
         MyQueue : {
             screen : MyQueueScreen,
-        },
-        Profil : {
-            screen : EditProfileScreen,
+            navigationOptions:{
+                tabBarIcon: ({tintColor})=>(
+                    <ImageView
+                        imageSrc={require('../assets/images/queue.png')}
+                        width={30}
+                        height={30} 
+                        type={'box'}/>
+                ),
+            }
         },
         MyPlace : {
-            screen : MyPlaceScreen,
-        }
-    },{      
-    tabBarOptions:{
-        activeTintColor: '#ffffff',
-        inactiveTintColor: '#1c3144',
-        activeBackgroundColor: '#1c3144',
-        labelStyle: {
-            fontSize: 16,
-            fontWeight: "bold",
-            marginBottom: 12
-
-
+            screen : EmptyMyPlaceScreen,
+            navigationOptions:{
+                tabBarIcon: ({})=>(
+                    <ImageView
+                        imageSrc={require('../assets/images/placeIcon.png')}
+                        width={25}
+                        height={25} 
+                        type={'box'}/>
+                ),
+            }
         },
-    },
+        Profil : {
+            screen : ProfilScreen,
+            navigationOptions:{
+                tabBarIcon: ({tintColor})=>(
+                    <ImageView
+                        imageSrc={require('../assets/images/user.png')}
+                        width={25}
+                        height={25} 
+                        type={'box'}/>
+                ),
+            }
+        }
+    },{
+        tabBarOptions:{
+            activeBackgroundColor: '#EDEDED',
+            showLabel: false,
+            // tabStyle:{
+            //     borderTopColor: '#EDEDED',
+            //     borderTopWidth: 3,
+            // }
+        },
 })
 export const MainDrawer = (auth) => {
     return createAppContainer(
@@ -97,6 +135,42 @@ export const MainDrawer = (auth) => {
                 screen: NewPasswordScreen,
                 navigationOptions : {
                     header : null
+                }
+            },
+            EditProfile:{
+                screen: EditProfileScreen,
+                navigationOptions : {
+                    header: null
+                }
+            },
+            Profile:{
+                screen: ProfilScreen,
+                navigationOptions : {
+                    header: null
+                }
+            },
+            Take:{
+                screen: TakeQueueScreen,
+                navigationOptions : {
+                    header: null
+                }
+            },
+            Make:{
+                screen: MakePlaceScreen,
+                navigationOptions : {
+                    header: null
+                }
+            },
+            Place:{
+                screen: MyPlaceScreen,
+                navigationOptions : {
+                    header: null
+                }
+            },
+            Process:{
+                screen: OnProcessScreen,
+                navigationOptions : {
+                    header: null
                 }
             }
         }, {    

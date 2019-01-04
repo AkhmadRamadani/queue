@@ -1,4 +1,4 @@
-package com.Queue;
+package com.queue;
 
 import com.facebook.react.ReactActivity;
 
