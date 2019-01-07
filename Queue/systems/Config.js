@@ -20,8 +20,8 @@ import EditProfileScreen from '../controllers/EditProfileScreen'
 import OnProcessScreen from '../controllers/OnProcessScreen'
 import ProfilScreen from '../controllers/ProfileScreen'
 import TakeQueueScreen from '../controllers/TakeQueueScreen'
-
 import ImageView from '../views/components/ImageView'
+import SplashScreen from '../controllers/SplashScreen';
 
 // ********************************************************************************
 // * APP Config
@@ -58,7 +58,7 @@ const tabNavigator = createBottomTabNavigator({
             }
         },
         MyPlace : {
-            screen : EmptyMyPlaceScreen,
+            screen : MyPlaceScreen,
             navigationOptions:{
                 tabBarIcon: ({})=>(
                     <ImageView
@@ -85,16 +85,17 @@ const tabNavigator = createBottomTabNavigator({
         tabBarOptions:{
             activeBackgroundColor: '#EDEDED',
             showLabel: false,
-            // tabStyle:{
-            //     borderTopColor: '#EDEDED',
-            //     borderTopWidth: 3,
-            // }
         },
 })
 export const MainDrawer = (auth) => {
     return createAppContainer(
         createStackNavigator({
-
+            Splash : {
+                screen : SplashScreen,
+                navigationOptions:{
+                    header : null
+                }
+            },
             First: {
                 screen: FirstScreen,
                 navigationOptions : {
@@ -175,7 +176,7 @@ export const MainDrawer = (auth) => {
             }
         }, {    
                 disableOpenGesture: true,
-                initialRouteName: auth ? "Second" : "First"
+                initialRouteName: auth ? "Second" : "Splash"
             })
     )
 }

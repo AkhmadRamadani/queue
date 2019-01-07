@@ -37,13 +37,13 @@ export default class MainScreenView extends Component {
                     lightTheme
                     containerStyle={{backgroundColor: '#EDEDED', borderRadius: 100}}
                     inputContainerStyle={{backgroundColor: '#EDEDED'}}
-                    inputStyle={{backgroundColor: '#EDEDED'}}
-                    searchIcon={false}
+                    inputStyle={{backgroundColor: '#EDEDED', color : '#000'}}
+                    searchIcon={true}
                     placeholder='Cari lainnya ...' />
             </View>
 
             <View style={{ marginBottom : 30 * AppConstants.ActiveTheme.AppObjectSpacing}}>
-                <FlatListNew/>
+                <FlatListNew data={this.props.data}/>
             </View>
         </View>
     }

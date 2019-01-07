@@ -5,7 +5,7 @@ import { GlobalStyles } from '../assets/GlobalStyles';
 import { AppConstants } from "../systems/Constants";
 import TextLine from './components/TextLine';
 import ImageView from './components/ImageView';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import Button from './components/Button';
 
 export default class MyPlaceScreenView extends Component {
@@ -44,12 +44,14 @@ export default class MyPlaceScreenView extends Component {
                     width={Dimensions.get('window').width / 3}
                     height={7 * AppConstants.ActiveTheme.AppObjectSpacing}/>
             </View>
-            <View style={{
-                backgroundColor: '#F5FCFF',
+            <ScrollView 
+                showsVerticalScrollIndicator= {false}>
+            <View style={{ 
                 justifyContent: 'center',
-                alignItems: 'center'}}>
+                alignItems: 'center', marginTop: 1 * AppConstants.ActiveTheme.AppObjectSpacing}}>
+                
                 <CardView
-                    style={{padding: 1 * AppConstants.ActiveTheme.AppObjectSpacing, marginTop : 16}}
+                    style={{cardElevation : 1,padding: 1 * AppConstants.ActiveTheme.AppObjectSpacing, marginTop : 8}}
                     width={Dimensions.get('window').width - (4 * AppConstants.ActiveTheme.AppObjectSpacing)}
                     height={AppConstants.ActiveTheme.AppInputHeightDefault + (6 * AppConstants.ActiveTheme.AppObjectSpacing)}
                     cardElevation={1}
@@ -61,14 +63,13 @@ export default class MyPlaceScreenView extends Component {
                         <Text style={{ fontSize: 15 }}>Antrian saat ini 3 dari 7</Text>
                     </View>
                 </CardView>
-            </View>
-            <View style={{ marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing,
-                marginBottom: 22 * AppConstants.ActiveTheme.AppObjectSpacing}}>
                 <FlatList
                     data={ this.state.FlatListItems }
 
                     renderItem={({item}) => 
-                        <View style={{ flexDirection: 'column', marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing }}>
+                        <View style={{ elevation : 1,flexDirection: 'column', marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing 
+                        ,borderColor : '#ededed', borderWidth : 1, borderStyle : "solid",
+                        paddingVertical : 8, borderRadius : 10}}>
                             <View style={{ flexDirection: 'row', marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing}}>
                                 <ImageView
                                     imageSrc={require('../assets/images/user.png')}
@@ -96,6 +97,7 @@ export default class MyPlaceScreenView extends Component {
                         </View>}
                 />
             </View>
+            </ScrollView>
         </View>
     }
 }

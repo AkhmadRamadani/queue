@@ -38,7 +38,7 @@ export default class TextLine extends React.Component {
 
             <Text
              style={[this.props.type == 'p' ? GlobalStyles.FontRegular : GlobalStyles.FontBold, 
-             this.type, this.props.textStyle]} 
+             this.type, this.props.textStyle,this.props.style]} 
              onPress={() => this.props.onPress()}>
                 {this.label.map((item, index) => {
                     if (item != '')

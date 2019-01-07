@@ -1,7 +1,7 @@
 export var responsData = null;
-export function loginFunc (email,password) {  
+export function registerFunc (name,email,password) {  
     return new Promise((resolve,reject)=>{
-        fetch('http://192.168.43.2/apiqueue/v1/auth/login',
+        fetch('http://192.168.43.2/apiqueue/v1/auth/register',
         {
             method : 'post',
             headers:{
@@ -9,6 +9,7 @@ export function loginFunc (email,password) {
                 'Content-Type' : 'application/json'
         },
             body: JSON.stringify({
+             name : name,
              email : email,
              password : password
             })

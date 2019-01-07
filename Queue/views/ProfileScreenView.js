@@ -39,8 +39,8 @@ export default class EditProfileScreenView extends Component {
                         width={Dimensions.get('window').width / 2}
                         height={10 * AppConstants.ActiveTheme.AppObjectSpacing}>
                     </ImageView>
-                    <Text style={{ fontWeight: "bold", fontSize: 20 }}>Queue Indonesia</Text>
-                    <Text style={{ fontSize: 16 }}>queueindonesia@gmail.com</Text>
+                    <Text style={{ fontWeight: "bold", fontSize: 20 }} >{this.props.name}</Text>
+                    <Text style={{ fontSize: 16 }} >{this.props.email}</Text>
                 </View> 
             </View>
             

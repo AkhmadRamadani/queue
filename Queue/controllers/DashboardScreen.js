@@ -10,7 +10,9 @@ export default class DashboardScreen extends React.Component {
 
         super(props);
 
-        this.state = {}
+        this.state = {
+            
+        }
 
         this.method = {
             modalOpen: this._modalOpen.bind(this),
@@ -74,7 +76,8 @@ export default class DashboardScreen extends React.Component {
 
     render = () => {
 
-        return <SecondScreen />
+        return <SecondScreen 
+        name = {this.props.navigation.state.params.name}/>
 
     }
 

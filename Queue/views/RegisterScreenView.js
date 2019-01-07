@@ -10,6 +10,10 @@ export default class RegisterScreenView extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            name : "",
+            email: "",
+            password: "",
+            passwordChange : "",
         };
     }
 
@@ -25,22 +29,26 @@ export default class RegisterScreenView extends Component {
                             style={{marginVertical : 3 * AppConstants.ActiveTheme.AppObjectSpacing}}/>
                     </View>
                     <Input
+                        onChangeText={this.props.nameChange}
                         ImageSrc={require('../assets/images/man.png')}
                         style={{borderRadius : 3 * AppConstants.ActiveTheme.AppObjectSpacing}}
                         placeholder={'Nama'}
                         radius={AppConstants.ActiveTheme.AppObjectSpacing} />
                     <Input
+                        onChangeText={this.props.emailChange}
                         ImageSrc={require('../assets/images/mail.png')}
                         style={{borderRadius : 3 * AppConstants.ActiveTheme.AppObjectSpacing}}
                         placeholder={'Email'}
                         radius={AppConstants.ActiveTheme.AppObjectSpacing} />
                     <Input
+                        onChangeText={this.props.passChange}
                         ImageSrc={require('../assets/images/lock.png')}
                         style={{borderRadius : 3 * AppConstants.ActiveTheme.AppObjectSpacing}}
                         placeholder={'Kata sandi'}
                         radius={AppConstants.ActiveTheme.AppObjectSpacing}
                         secureMode={true} />
                     <Input
+                        onChangeText={this.props.passChecker}
                         ImageSrc={require('../assets/images/lock.png')}
                         style={{borderRadius : 3 * AppConstants.ActiveTheme.AppObjectSpacing}}
                         placeholder={'Ketik Ulang Kata sandi'}

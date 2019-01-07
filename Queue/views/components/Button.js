@@ -13,6 +13,7 @@ export default class Button extends Component {
     render() {
         return (
             <TouchableOpacity
+                activeOpacity = {0.8}
                 style={[
                     GlobalStyles.Container,
                     {

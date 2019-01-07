@@ -11,6 +11,8 @@ export default class FirstScreenView extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            email : '',
+            password : ''
         };
     }
 
@@ -28,11 +30,13 @@ export default class FirstScreenView extends Component {
                     ImageSrc={require('../assets/images/mail.png')}
                     style={{borderRadius : 3 * AppConstants.ActiveTheme.AppObjectSpacing}}
                     placeholder={'Email'}
+                    onChangeText={this.props.emailChange}
                     radius={AppConstants.ActiveTheme.AppObjectSpacing} />
                 <Input
                     ImageSrc={require('../assets/images/lock.png')}
                     style={{borderRadius : 3 * AppConstants.ActiveTheme.AppObjectSpacing}}
                     placeholder={'Kata sandi'}
+                    onChangeText={this.props.passChange}
                     radius={AppConstants.ActiveTheme.AppObjectSpacing}
                     secureMode={true} />
                     

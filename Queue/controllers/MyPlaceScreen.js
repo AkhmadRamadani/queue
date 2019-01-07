@@ -1,5 +1,4 @@
 import React from 'react';
-
 import MyPlaceScreenView from "../views/MyPlaceScreenView";
 
 export default class MyPlaceScreen extends React.Component {

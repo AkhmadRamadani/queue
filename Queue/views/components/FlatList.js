@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { GlobalStyles } from '../../assets/GlobalStyles';
-import { View, FlatList, Text,TouchableOpacity, Alert, RefreshControl } from 'react-native';
-
+import { View, FlatList, Text,TouchableOpacity, Alert, RefreshControl ,Dimensions} from 'react-native';
+   
 import { AppConstants } from "../../systems/Constants";
 import ImageView from '../components/ImageView';
 
@@ -67,34 +67,35 @@ export default class FlatListComponent extends Component {
         return (
             <View>
                 <FlatList
-                    data={ this.state.FlatListItems }
+                    data={ this.props.data }
+                    showsVerticalScrollIndicator= {false}
                     renderItem={({item}) =>
-                    <TouchableOpacity activeOpacity={0.8} onPress={this.GetItem.bind(this, item.nama)}>
+                    <TouchableOpacity activeOpacity={0.8} onPress={this.GetItem.bind(this, item.name)}>
                         <View style={{alignItems: 'center',
                         marginVertical : 8
                                      }}>
                             <View style={{borderColor :'#ededed', borderStyle : "solid",
                             borderWidth : 2, alignItems : "center",
-                            width: '93%', borderRadius : 24}}>
+                            width: '93%', borderRadius : 24, elevation : 1}}>
                             <ImageView
-                                style={{ borderTopLeftRadius: 10,
-                                         borderTopRightRadius: 10, 
-                                         width: 50 * AppConstants.ActiveTheme.AppObjectSpacing, 
-                                         height:150, marginBottom: 8}}
+                                style={{
+                                         borderTopLeftRadius: 16,
+                                         borderTopRightRadius: 16, 
+                                         width: Dimensions.get('window').width / 1.091, 
+                                         height: 132, marginBottom: 8}}
                                 imageSrc={require('../../assets/images/images.png')}
-                                // onPress={this.GetItem.bind(this, item.key)}
                             />
                             <Text>
-                                {item.nama}
+                                {item.name}
                             </Text>
                             <Text>
-                                {item.alamat}
+                                {item.address}
                             </Text>
                             <Text style={{marginTop : 20, marginBottom : 8}}>
-                                {item.antrian}
+                                wkwk
                                 </Text>
                             </View>
-                        </View></TouchableOpacity>}
+                        </View></TouchableOpacity>}keyExtractor={(item,index) => item.id_place}
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
