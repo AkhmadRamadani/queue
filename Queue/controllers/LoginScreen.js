@@ -1,5 +1,5 @@
 import React from 'react';
-import { BackHandler , Alert} from 'react-native';
+import { BackHandler , Alert,AsyncStorage} from 'react-native';
 import { name as appName } from '../../app.json';
 import {responsData,loginFunc} from '../models/loginModels'
 import FirstScreen from "../views/FirstScreenView";
@@ -12,7 +12,12 @@ export default class LoginScreen extends React.Component {
 
         this.state = {
             email: "",
-            password: ""
+            id_user : '',
+            name : '',
+            photoprofile : '',
+            
+            password: "",
+            
         }
 
         this.content = [];
@@ -35,6 +40,13 @@ export default class LoginScreen extends React.Component {
         return true
     }
 
+    saveData () {
+        AsyncStorage.setItem("id_user",this.state.id_user)
+        AsyncStorage.setItem("email",this.state.email)
+        AsyncStorage.setItem("name",this.state.name)
+        AsyncStorage.setItem("password",this.state.password)
+        AsyncStorage.setItem("photoprofile",this.state.photoprofile)
+    }
     //IKI SING DIGAWE NDEK ONPRESS E BUTTON NDEK FIRST SCREEN
     //PAHAMI SEK
     loginHandler = async () => {
@@ -42,12 +54,22 @@ export default class LoginScreen extends React.Component {
             if (responsData.status == false){
                 Alert.alert('Failed Login');
             }else if(responsData.status == true){
+                this.setState({
+                id_user : responsData.data.id_user,
+                name : responsData.data.name,
+                email  :responsData.data.email,
+                password :responsData.data.password,
+                photoprofile : responsData.data.photoprofile
+                });
+                this.saveData();
+
                 this.props.navigation.push("Second", 
-               {   id_user : responsData.data.id_user,
-                    name : responsData.data.name,
-                   email  :responsData.data.email,
-                password :responsData.data.password});
-            
+               { id_user : responsData.data.id_user,
+                name : responsData.data.name,
+                email  :responsData.data.email,
+                password :responsData.data.password,
+                photoprofile : responsData.data.photoprofile});
+                
             }
         })
     }

@@ -1,7 +1,7 @@
 import ProfileScreenView from '../views/ProfileScreenView'
 
 import React from 'react';
-
+import {AsyncStorage} from "react-native";
 export default class ProfileScreen extends React.Component {
 
     constructor(props) {
@@ -9,6 +9,7 @@ export default class ProfileScreen extends React.Component {
         super(props);
 
         this.state = {
+            name : ''
         }
 
         this.content = [];
@@ -30,7 +31,25 @@ export default class ProfileScreen extends React.Component {
             content: con
         });
     }
-
+    data (){
+        AsyncStorage.getItem("name", (error,result) =>{
+            if (result != null) {
+                this.setState({
+                    name : result
+                })
+            }
+        });
+        AsyncStorage.getItem("email", (error,result) =>{
+            if (result != null) {
+                this.setState({
+                    email : result
+                })
+            }
+        });
+    }
+    componentWillMount () {
+        this.data();
+    }
     sett = async () => {
         this.props.navigation.push("EditProfile")
     }
@@ -42,8 +61,8 @@ export default class ProfileScreen extends React.Component {
         return <ProfileScreenView 
             onPressSetting={() => this.sett()} 
             onPressMake={() => this.make()}
-            name = {this.props.navigation.state.params.name}
-            email = {this.props.navigation.state.params.email}
+            name = {this.state.name}
+            email = {this.state.email}
         />
     }
 }

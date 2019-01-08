@@ -176,7 +176,7 @@ export const MainDrawer = (auth) => {
             }
         }, {    
                 disableOpenGesture: true,
-                initialRouteName: auth ? "Second" : "Splash"
+                initialRouteName: "Splash"
             })
     )
 }

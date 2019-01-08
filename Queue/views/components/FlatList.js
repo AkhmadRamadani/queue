@@ -10,36 +10,6 @@ export default class FlatListComponent extends Component {
         super(props);
         this.state = {
             refreshing: false,
-            FlatListItems: [
-                {   key: "1",
-                    nama: "Dr. Saiful Anwar Regional Hospital",
-                    alamat: "Jalan Jaksa Agung Suprapto No. 2, Klojen",
-                    antrian: "Antrian saat ini 3 dari 7",
-                },
-                {   key: "2",
-                    nama: "Dr. Saiful Anwar Regional Hospital",
-                    alamat: "Jalan Jaksa Agung Suprapto No. 2, Klojen",
-                    antrian: "Antrian saat ini 3 dari 7"
-                },
-                {   key: "3",
-                    nama: "Dr. Saiful Anwar Regional Hospital",
-                    alamat: "Jalan Jaksa Agung Suprapto No. 2, Klojen",
-                    antrian: "Antrian saat ini 3 dari 7"
-                },
-                {   key: "4",
-                    nama: "Dr. Saiful Anwar Regional Hospital",
-                    alamat: "Jalan Jaksa Agung Suprapto No. 2, Klojen",
-                    antrian: "Antrian saat ini 3 dari 7"
-                }
-                // { key: "Skptricks" },
-                // { key: "Sumit" },
-                // { key: "Amit" },
-                // { key: "React" },
-                // { key: "React Native" },
-                // { key: "Java" },
-                // { key: "Javascript" },
-                // { key: "PHP" },
-              ]
         };
     }
 
@@ -50,7 +20,7 @@ export default class FlatListComponent extends Component {
     };
 
     GetItem(item) {
-        Alert.alert(item);
+        this.props.onPress(item);
     }
 
     _onRefresh = () => {
@@ -68,32 +38,37 @@ export default class FlatListComponent extends Component {
             <View>
                 <FlatList
                     data={ this.props.data }
+                    sisaAntrean = {this.props.sisaAntrean}
                     showsVerticalScrollIndicator= {false}
                     renderItem={({item}) =>
-                    <TouchableOpacity activeOpacity={0.8} onPress={this.GetItem.bind(this, item.name)}>
+                    <TouchableOpacity activeOpacity={0.8} 
+                        onPress={() => this.props.onItemClick(
+                            {
+                                alamat: item.address,
+                                name: item.name,
+                                id: item.id_place,
+                            }
+                        )}>
                         <View style={{alignItems: 'center',
                         marginVertical : 8
                                      }}>
                             <View style={{borderColor :'#ededed', borderStyle : "solid",
                             borderWidth : 2, alignItems : "center",
-                            width: '93%', borderRadius : 24, elevation : 1}}>
+                            width: '93%', borderRadius : 24, paddingBottom : 8}}>
                             <ImageView
                                 style={{
-                                         borderTopLeftRadius: 16,
-                                         borderTopRightRadius: 16, 
-                                         width: Dimensions.get('window').width / 1.091, 
-                                         height: 132, marginBottom: 8}}
+                                         borderTopLeftRadius: 12,
+                                         borderTopRightRadius: 12, 
+                                         width: Dimensions.get('window').width / 1, 
+                                         height: Dimensions.get('window').height /4.28, marginBottom: 8}}
                                 imageSrc={require('../../assets/images/images.png')}
                             />
-                            <Text>
+                            <Text style={{fontWeight : 'bold', fontSize : 18}}>
                                 {item.name}
                             </Text>
                             <Text>
                                 {item.address}
                             </Text>
-                            <Text style={{marginTop : 20, marginBottom : 8}}>
-                                wkwk
-                                </Text>
                             </View>
                         </View></TouchableOpacity>}keyExtractor={(item,index) => item.id_place}
                     refreshControl={

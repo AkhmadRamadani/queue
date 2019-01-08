@@ -36,7 +36,7 @@ export default class Button extends Component {
                         {
                             fontSize: this.props.textSize != undefined ? this.props.textSize : 20,
                             color: this.props.textColor != undefined ? this.props.textColor : AppConstants.ActiveTheme.AppBackgroundColor
-                        }
+                        }, this.props.style
                     ]}>
                     {this.props.label}
                 </Text>

@@ -43,7 +43,9 @@ export default class MainScreenView extends Component {
             </View>
 
             <View style={{ marginBottom : 30 * AppConstants.ActiveTheme.AppObjectSpacing}}>
-                <FlatListNew data={this.props.data}/>
+                <FlatListNew data={this.props.data} sisaAntrean={this.props.sisaAntrean}
+                     onPress={()=>this.props.onPressClick()}
+                    onItemClick={(params) => this.props.onItemClick(params)} />
             </View>
         </View>
     }

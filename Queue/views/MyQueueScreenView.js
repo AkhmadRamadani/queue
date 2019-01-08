@@ -4,7 +4,7 @@ import { GlobalStyles } from '../assets/GlobalStyles';
 import { AppConstants } from "../systems/Constants";
 import TextLine from './components/TextLine';
 import ImageView from './components/ImageView';
-
+import FlatListNew from './components/flatListNew2';
 export default class MyQueueScreenView extends Component {
     constructor(props) {
         super(props);
@@ -22,15 +22,7 @@ export default class MyQueueScreenView extends Component {
                     height={7 * AppConstants.ActiveTheme.AppObjectSpacing}
                     />
             </View>  
-
-            <TextLine
-                style={[GlobalStyles.Container,{
-                    alignItems: 'center', flex: 1
-                }]}
-                textStyle={{ color: AppConstants.ActiveTheme.AppFontBlackColor }}
-                type={'h4'}
-                label={'Anda sedang tidak mengantri'}
-            />
+                <FlatListNew data={this.props.data}></FlatListNew>
         </View>
     }
 }

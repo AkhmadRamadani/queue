@@ -64,11 +64,12 @@ export default class RegisterScreenView extends Component {
                         onPress={()=>this.props.onPressDaftar()}
                         radius={AppConstants.ActiveTheme.AppObjectSpacing} />
                     <View style={{marginTop : 2 * AppConstants.ActiveTheme.AppObjectSpacing, justifyContent:"center" , alignItems :"center"}}>
-                        <TextLine
-                            label={'Sudah punya akun ? Masuk !!!'}
-                            type={'h6'}
-                            onPress={()=>this.props.onPressMasuk()}>
-                        </TextLine>
+                        <Button
+                                style = {[GlobalStyles.FontH5,{backgroundColor : 'transparent',
+                                        color : 'black', height : 20}]}
+                                label={'Sudah Punya Akun ? Masuk !!!'}
+                                onPress={()=>this.props.onPressMasuk()}>
+                        </Button>
                     </View>
                 </View>
                 </View>

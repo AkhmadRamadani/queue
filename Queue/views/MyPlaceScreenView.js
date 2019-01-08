@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import CardView from 'react-native-cardview';
-import { View, Dimensions, Text } from 'react-native';
+import { View, Dimensions, Text, Alert } from 'react-native';
 import { GlobalStyles } from '../assets/GlobalStyles';
 import { AppConstants } from "../systems/Constants";
 import TextLine from './components/TextLine';
 import ImageView from './components/ImageView';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import FlatList from './components/FlatListNew';
+import { ScrollView } from 'react-native-gesture-handler';
 import Button from './components/Button';
 
 export default class MyPlaceScreenView extends Component {
@@ -34,9 +35,26 @@ export default class MyPlaceScreenView extends Component {
                 }
             ]
         };
+        // Alert.alert (this.props.statusPlaceData);
+        
     }
 
     render() {
+        if (this.props.statusPlaceData == false) {
+            return <View style={[GlobalStyles.Wrapper]}>
+                    <View style={{justifyContent:"center", alignItems:"center", borderBottomWidth: 2, borderBottomColor: '#EDEDED'}}>
+                        <ImageView
+                            imageSrc={require('../assets/images/myplace.png')}
+                            width={Dimensions.get('window').width / 3}
+                            height={7 * AppConstants.ActiveTheme.AppObjectSpacing}/>
+                    </View>
+                    <View style={{flex : 1, justifyContent : 'center', alignItems : 'center'}}>
+                        <Text style={{ fontSize: 20 }}>Anda belum mendaftarkan tempat</Text>
+                        <Text style={{ fontSize: 20 }}>Klik My Profile -> Tambah tempat</Text>
+                        <Text style={{ fontSize: 20 }}>dan isi data tempat anda</Text>
+                    </View>
+                </View>
+        }else {
         return <View style={[GlobalStyles.Wrapper, {}]}>
             <View style={{justifyContent:"center", alignItems:"center", borderBottomWidth: 2, borderBottomColor: '#EDEDED'}}>
                 <ImageView
@@ -48,7 +66,7 @@ export default class MyPlaceScreenView extends Component {
                 showsVerticalScrollIndicator= {false}>
             <View style={{ 
                 justifyContent: 'center',
-                alignItems: 'center', marginTop: 1 * AppConstants.ActiveTheme.AppObjectSpacing}}>
+                alignItems: 'center', marginTop: Dimensions.get('window').height / 10, marginBottom : 16}}>
                 
                 <CardView
                     style={{cardElevation : 1,padding: 1 * AppConstants.ActiveTheme.AppObjectSpacing, marginTop : 8}}
@@ -58,46 +76,16 @@ export default class MyPlaceScreenView extends Component {
                     cardMaxElevation={1}
                     cornerRadius={5}>
                     <View style={{justifyContent: "center", alignItems: "center"}}>
-                        <Text style={{ fontWeight: "bold", fontSize: 15 }}>Dr. Saiful Anwar Regional Hospital</Text>
-                        <Text style={{ marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing, fontSize: 15 }}>Jalan Jaksa Agung Suprapto No. 2, Klojen</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 15 }}>{this.props.name}</Text>
+                        <Text style={{ marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing, fontSize: 15 }}>{this.props.address}</Text>
                         <Text style={{ fontSize: 15 }}>Antrian saat ini 3 dari 7</Text>
                     </View>
                 </CardView>
-                <FlatList
-                    data={ this.state.FlatListItems }
-
-                    renderItem={({item}) => 
-                        <View style={{ elevation : 1,flexDirection: 'column', marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing 
-                        ,borderColor : '#ededed', borderWidth : 1, borderStyle : "solid",
-                        paddingVertical : 8, borderRadius : 10}}>
-                            <View style={{ flexDirection: 'row', marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing}}>
-                                <ImageView
-                                    imageSrc={require('../assets/images/user.png')}
-                                    width={Dimensions.get('window').width / 2}
-                                    height={10 * AppConstants.ActiveTheme.AppObjectSpacing}
-                                />
-                                <View style={{alignItems: "center"}}> 
-                                    <Text style={{fontSize: 25, fontWeight:"bold"}}>
-                                        {item.nomor}
-                                    </Text>
-                                    <Text style={{fontSize:15}}>
-                                        {item.nama}
-                                    </Text>
-                                </View>
-                            </View>
-                            <View style={{ justifyContent: "center", alignItems: "center" }}>
-                                <Button
-                                    style={{ backgroundColor: "#3399f8" }}
-                                    width={Dimensions.get('window').width - (4 * AppConstants.ActiveTheme.AppObjectSpacing)}
-                                    height={AppConstants.ActiveTheme.AppInputHeightDefault + (1 * AppConstants.ActiveTheme.AppObjectSpacing)}
-                                    label={'Proses'}
-                                    onPress={()=> this.props.onPressProcess()}
-                                />
-                            </View>
-                        </View>}
-                />
+                <FlatList imageSrc={require('../assets/images/user.png')}
+                          data={this.props.data}></FlatList>
             </View>
             </ScrollView>
         </View>
+        }
     }
 }

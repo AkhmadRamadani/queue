@@ -49,18 +49,20 @@ export default class FirstScreenView extends Component {
                         label={'Masuk'}
                         onPress={()=>this.props.onPress()}
                         radius={AppConstants.ActiveTheme.AppObjectSpacing} />
-                    <View style={{marginTop : 2 * AppConstants.ActiveTheme.AppObjectSpacing, justifyContent:"center" , alignItems :"center"}}>
-                        <TextLine
+                    <View style={{justifyContent:"center" , alignItems :"center", margin : 8}}>
+                        <Button
+                            style = {[GlobalStyles.FontH5,{backgroundColor : 'transparent',
+                                      color : 'black', height : 20}]}
                             label={'Belum Punya Akun ? Daftar !!!'}
                             type={'h6'}
                             onPress={()=>this.props.onPressRegister()}>
-                        </TextLine>
-                        <TextLine
-                            style={{marginTop : 1 * AppConstants.ActiveTheme.AppObjectSpacing}}
+                        </Button>
+                        <Button
+                            style={[{color : 'black', height : 20, backgroundColor : 'transparent',justifyContent : 'center'},GlobalStyles.FontH5]}
                             label={'Lupa Kata sandi ?'}
                             onPress={()=>this.props.onPressForgot()}
                             type={'h6'}>
-                        </TextLine>
+                        </Button>
                     </View>
                 </View>
             </View>
