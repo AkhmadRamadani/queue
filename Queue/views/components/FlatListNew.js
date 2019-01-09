@@ -31,6 +31,13 @@ export default class FlatListNew extends React.Component{
                                 height={30}
                                 width ={30}
                                 radius={20}
+                                onPress={() => this.props.onItemClick(
+                                    {
+                                        photoprofile : item.photoprofile,
+                                        kode : item.queue_code,
+                                        name : item.name
+                                    }
+                                )}  
                                 style={{
                                     alignItems : 'center',
                                     backgroundColor : 'rgba(252, 214, 112, 1)'

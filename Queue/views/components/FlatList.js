@@ -45,7 +45,7 @@ export default class FlatListComponent extends Component {
                         onPress={() => this.props.onItemClick(
                             {
                                 alamat: item.address,
-                                name: item.name,
+                                name: item.name_place,
                                 id: item.id_place,
                             }
                         )}>
@@ -53,7 +53,7 @@ export default class FlatListComponent extends Component {
                         marginVertical : 8
                                      }}>
                             <View style={{borderColor :'#ededed', borderStyle : "solid",
-                            borderWidth : 2, alignItems : "center",
+                            borderWidth : 2, alignItems : "center", elevation : 1,
                             width: '93%', borderRadius : 24, paddingBottom : 8}}>
                             <ImageView
                                 style={{
@@ -64,7 +64,7 @@ export default class FlatListComponent extends Component {
                                 imageSrc={require('../../assets/images/images.png')}
                             />
                             <Text style={{fontWeight : 'bold', fontSize : 18}}>
-                                {item.name}
+                                {item.name_place}
                             </Text>
                             <Text>
                                 {item.address}

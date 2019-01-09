@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, Text, Alert, TouchableHighlight } from 'react-native';
+import { View, Dimensions, ScrollView,Text, Alert, TouchableOpacity } from 'react-native';
 import { GlobalStyles } from '../assets/GlobalStyles';
 import { AppConstants } from "../systems/Constants";
 import TextLine from './components/TextLine';
@@ -18,35 +18,32 @@ export default class MainScreenView extends Component {
     }
 
     render() {
-        return <View>
-        
-            <View style={{justifyContent:"center", alignItems:"center", borderBottomWidth: 2, borderBottomColor: '#EDEDED'}}>
+        return <View style={[GlobalStyles.Wrapper, {}]}>
+                <View style={{height : Dimensions.get('window').height/ 10,
+                        flexDirection : 'row',borderBottomWidth: 2, justifyContent : 'center',borderBottomColor: '#EDEDED'}}>
+                    <View style={{flex : 1, alignItems : "flex-end"}}>
+                        <ImageView
+                            imageSrc={require('../assets/images/Label.png')}
+                            width={Dimensions.get('window').width / 3}
+                            height={7 * AppConstants.ActiveTheme.AppObjectSpacing}
+                            />
+                    </View>
+                    <View style={{flex : 0.48, alignItems : 'flex-end',justifyContent : "flex-start",
+                            marginRight : 16, marginBottom : 10}}>
+                            <TouchableOpacity activeOpacity ={0.5} 
+                                              onPress={()=>this.props.onPressSearch()}>
+                                <ImageView
+                                    imageSrc={require('../assets/images/search.png')}
+                                    width={Dimensions.get('window').width / 14}
+                                    height={Dimensions.get('window').height / 10}
+                                    />
+                            </TouchableOpacity>
+                    </View>
+                </View>
+                    <FlatListNew data={this.props.data} sisaAntrean={this.props.sisaAntrean}
+                        onPress={()=>this.props.onPressClick()}
+                        onItemClick={(params) => this.props.onItemClick(params)} />
                 
-                <ImageView
-                    imageSrc={require('../assets/images/Label.png')}
-                    width={Dimensions.get('window').width / 3}
-                    height={7 * AppConstants.ActiveTheme.AppObjectSpacing}
-                   
-                    />
-                
-            </View>
-
-              
-            <View style={{ margin : 1 * AppConstants.ActiveTheme.AppObjectSpacing}}>
-                <SearchBar
-                    lightTheme
-                    containerStyle={{backgroundColor: '#EDEDED', borderRadius: 100}}
-                    inputContainerStyle={{backgroundColor: '#EDEDED'}}
-                    inputStyle={{backgroundColor: '#EDEDED', color : '#000'}}
-                    searchIcon={true}
-                    placeholder='Cari lainnya ...' />
-            </View>
-
-            <View style={{ marginBottom : 30 * AppConstants.ActiveTheme.AppObjectSpacing}}>
-                <FlatListNew data={this.props.data} sisaAntrean={this.props.sisaAntrean}
-                     onPress={()=>this.props.onPressClick()}
-                    onItemClick={(params) => this.props.onItemClick(params)} />
-            </View>
-        </View>
+                </View>
     }
 }

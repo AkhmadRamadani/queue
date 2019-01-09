@@ -1,5 +1,5 @@
 
-export var response = null;
+export var responseSisa = null;
 export function getSisaAntrean (id_place) {  
     return new Promise((resolve,reject)=>{
         fetch('http://192.168.43.2/apiqueue/v1/place/sisaAntrean',
@@ -15,7 +15,7 @@ export function getSisaAntrean (id_place) {
       }).then((response)=> response.json())
       .then((responseJson)=>{
           
-        response = responseJson;
+        responseSisa = responseJson;
         // this.setData(responseJson);
         resolve(true);
       }).catch((error) => {

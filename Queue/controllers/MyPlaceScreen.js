@@ -3,6 +3,7 @@ import {Alert, AsyncStorage} from "react-native";
 import MyPlaceScreenView from "../views/MyPlaceScreenView";
 import {responsData, getMyPlace} from '../models/getMyPlace'
 import {response, getPlaceQueueList} from '../models/getMyPlaceQueueList'
+import {responseSisa, getSisaAntrean } from '../models/getSisaAntrean';
 
 export default class MyPlaceScreen extends React.Component {
 
@@ -40,10 +41,13 @@ export default class MyPlaceScreen extends React.Component {
                 this.setState({
                     statusPlaceData : responsData.status, 
                     id_place : responsData.data.id_place,
-                    name : responsData.data.name,
+                    name : responsData.data.name_place,
                     address  :responsData.data.address,
                     picture :responsData.data.picture,
                     status: responsData.data.status});
+                getSisaAntrean(responsData.data.id_place).then(res=>{
+                    this.setState({sisa : responseSisa.data})
+                });
                 getPlaceQueueList(responsData.data.id_place).then(res=>{
                     this.setState({data : response.data})
                 });
@@ -52,6 +56,9 @@ export default class MyPlaceScreen extends React.Component {
             }
                    
         })
+    }
+    onItemClick = async ( params ) => {
+        this.props.navigation.push( "Process",params)
     }
     process = async () => {
         this.props.navigation.push("Process")
@@ -64,6 +71,8 @@ export default class MyPlaceScreen extends React.Component {
         address = {this.state.address}
         name = {this.state.name}
         data = {this.state.data}
+        sisa = {this.state.sisa}
+        onItemClick={(params) => this.onItemClick(params)}
         statusPlaceData = {this.state.statusPlaceData}
         />
     }

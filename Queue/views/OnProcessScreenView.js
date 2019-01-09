@@ -32,8 +32,8 @@ export default class OnProcessScreenView extends Component {
                     height={10 * AppConstants.ActiveTheme.AppObjectSpacing}
                 />
                 <View style={{ flexDirection: 'column', justifyContent: "center", alignItems: "center"}}>
-                    <Text style={{fontSize: 23, fontWeight:'bold'}}>A0003</Text>
-                    <Text style={{fontSize: 20}}>Ariana Grande</Text>
+                    <Text style={{fontSize: 23, fontWeight:'bold'}}>{this.props.kode}</Text>
+                    <Text style={{fontSize: 20}}>{this.props.name}</Text>
                 </View>
             </View>
             <View style={{ justifyContent: "center", alignItems: "center", marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing}}>

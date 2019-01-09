@@ -22,7 +22,8 @@ import ProfilScreen from '../controllers/ProfileScreen'
 import TakeQueueScreen from '../controllers/TakeQueueScreen'
 import ImageView from '../views/components/ImageView'
 import SplashScreen from '../controllers/SplashScreen';
-
+import ReviewScreen from "../controllers/ReviewScreen";
+import SearchScreen from "../controllers/SearchScreen";
 // ********************************************************************************
 // * APP Config
 // ********************************************************************************
@@ -172,6 +173,18 @@ export const MainDrawer = (auth) => {
                 screen: OnProcessScreen,
                 navigationOptions : {
                     header: null
+                }
+            },
+            Review : {
+                screen : ReviewScreen,
+                navigationOptions : {
+                    header : null
+                }
+            },
+            Search : {
+                screen : SearchScreen,
+                navigationOptions : {
+                    header : null
                 }
             }
         }, {    

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity , FlatList, StyleSheet,View, Image,Dimensions} from 'react-native';
+import { Text, TouchableOpacity , FlatList, StyleSheet,View, Image,Dimensions, RefreshControl} from 'react-native';
 import ImageView from './ImageView';
 import TextLine from './TextLine';
 import Button from './Button';
@@ -7,8 +7,16 @@ export default class flatListNew2 extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            refreshing : false
         }
     }
+    _onRefresh = () => {
+        this.setState({refreshing: true});
+        
+        // fetchData().then(() => {
+        //   this.setState({refreshing: false});
+        // });
+      }
     render =()=>{
         return(
             <View>
@@ -17,11 +25,11 @@ export default class flatListNew2 extends React.Component{
                 showsVerticalScrollIndicator= {false}
                 renderItem={({item}) => 
                 <View style={[styles.container,this.props.style]}>
-                    <ImageView imageSrc={this.props.imageSrc} style={[styles.photo,this.props.style]}/>
+                    <Image source={this.props.imageSrc} style={[styles.photo,this.props.style]}/>
                     <View style={[styles.container_text,this.props.style]}>
-                        <TextLine style={[styles.title,this.props.style]} label={item.queue_code}>
+                        <TextLine style={[styles.title,this.props.style]} label={item.name_place}>
                         </TextLine>
-                        <TextLine style={[this.props.style,styles.description]} label={item.address}>
+                        <TextLine style={[this.props.style,styles.description]} label={item.queue_code}>
                         </TextLine>
                     </View>
                     <View style={{
@@ -31,6 +39,13 @@ export default class flatListNew2 extends React.Component{
                                 height={30}
                                 width ={30}
                                 radius={20}
+                                onPress={() => this.props.onItemClick(
+                                    {
+                                        name_place : item.name_place,
+                                        kode : item.queue_code,
+                                        address : item.address
+                                    }
+                                )}                
                                 style={{
                                     alignItems : 'center',
                                     backgroundColor : 'rgba(252, 214, 112, 1)'
@@ -38,12 +53,19 @@ export default class flatListNew2 extends React.Component{
                                 }}></Button>
                     </View>
                 </View>}keyExtractor={(item,index) => item.id_queue}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh}
+                    />
+                }    
                 ></FlatList>
             </View>
         );
     }}
 const styles = StyleSheet.create({
     container: {
+        flex : 1,
         flexDirection: 'row',
         padding: 10,
         marginLeft:16,
@@ -72,8 +94,8 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
     },
     photo: {
-        height: 50,
-        width: 50,
-        borderRadius : 50
+        width : Dimensions.get('window').width / 3,
+        height : Dimensions.get('window').height/ 10,
+        borderRadius : 5
     },
 });

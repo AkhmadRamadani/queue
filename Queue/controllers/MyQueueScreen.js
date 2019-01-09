@@ -14,24 +14,31 @@ export default class MyQueueScreen extends React.Component {
 
         this.content = [];
     }
-
-    componentWillMount = () => {
+    
+    componentWillMount () {
         AsyncStorage.getItem("id_user" ,(error, result)=>{
             this.setState({
                 id_user : result
             })
             this.getMyQueueList();
-        })
-        
+        }) 
     }
     getMyQueueList = async () => {
-        await getMyQueue(parseInt( this.state.id_user)).then(()=>{
-            this.setState({data : responsData.data});            
+        await getMyQueue(parseInt(this.state.id_user)).then(()=>{
+            this.setState({data : responsData.data,
+                id_queue : responsData.data.id_queue,
+                name_place : responsData.data.name_place,
+                address : responsData.data.address,
+                picture : responsData.data.picture
+            })  
         })
-        Alert.alert(JSON.stringify(this.state.data))
+    }
+    onItemClick = async ( params ) => {
+        this.props.navigation.push( "Review",params)
     }
     render = () => {
-        return <MyQueueScreenView data={this.state.data}/>
+        return <MyQueueScreenView data = {this.state.data}
+        onItemClick={(params) => this.onItemClick(params)}/>
     }
 
 

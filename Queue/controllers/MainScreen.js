@@ -31,11 +31,14 @@ export default class MainScreen extends React.Component {
     onItemClick = async ( params ) => {
         this.props.navigation.push( "Take",params)
     }
-
+    Search = async () => {
+        this.props.navigation.push("Search")
+    }
     render = () => {
         return <MainScreenView
             onPressClick={() => this.Click()} data = {this.state.data}
             sisaAntrean = {this.state.sisaAntrean}
+            onPressSearch={()=>this.Search()}
             onItemClick={(params) => this.onItemClick(params)}/>
     }
 

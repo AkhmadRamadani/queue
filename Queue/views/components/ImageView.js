@@ -14,6 +14,7 @@ export default class ImageView extends Component {
         return (
             <View>
                 <Image
+                
                     source={this.props.imageSrc}
                     style={[
                         {
