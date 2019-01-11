@@ -1,4 +1,5 @@
 import ProfileScreenView from '../views/ProfileScreenView'
+import {responsData, getMyPlace} from '../models/getMyPlace'
 
 import React from 'react';
 import {AsyncStorage} from "react-native";
@@ -46,10 +47,34 @@ export default class ProfileScreen extends React.Component {
                 })
             }
         });
+        AsyncStorage.getItem("photoprofile", (error,result) =>{
+            if (result != null) {
+                this.setState({
+                    photoprofile : result
+                })
+            }
+        });
+        
     }
     componentWillMount () {
         this.data();
+        AsyncStorage.getItem("id_user", (error,result) =>{
+            if (result != null) {
+                this.setState({
+                    id_user : result
+                })
+            }    
+            this.myPlace();
+        });
     }
+    myPlace = async () =>{
+        await getMyPlace(this.state.id_user).then(()=>{
+            this.setState({
+                havePlace : responsData.status
+            })
+        })
+    }
+    
     sett = async () => {
         this.props.navigation.push("EditProfile")
     }
@@ -59,9 +84,11 @@ export default class ProfileScreen extends React.Component {
 
     render = () => {
         return <ProfileScreenView 
+            havePlace = {this.state.havePlace}
             onPressSetting={() => this.sett()} 
             onPressMake={() => this.make()}
             name = {this.state.name}
+            photoprofile = {this.state.photoprofile}
             email = {this.state.email}
         />
     }

@@ -1,9 +1,9 @@
 import React from 'react';
 import {Alert, AsyncStorage} from "react-native";
-import MakePlaceScreenView from "../views/MakePlaceScreenView";
+import AddImagePlaceScreenView from "../views/AddImagePlaceScreenView";
 import { showImagePicker } from 'react-native-image-picker';
 import { responseData,imageUpload } from "../models/createPlace";
-import { responseRegPlace,registerPlace } from "../models/regPlace";
+// import { responseRegPlace,registerPlace } from "../models/regPlace";
 const options = {
     title: "Pilih Gambar",
     takePhotoButtonTitle: "Buka Kamera",
@@ -11,7 +11,7 @@ const options = {
     quality: 1
 }
 
-export default class MakePlaceScreen extends React.Component {
+export default class AddImagePlaceScreen extends React.Component {
 
     constructor(props) {
 
@@ -30,11 +30,11 @@ export default class MakePlaceScreen extends React.Component {
                 id_user : result
             });
         })
+        this.Alert();
     }
-    create = async () => {
-        this.props.navigation.push("AddImage")
+    Alert = async () => {
+        Alert.alert(this.props.navigation.state.params.id_place);
     }
-
     selectPhoto = () => {
         showImagePicker(options, (response) => {
             console.log("Response = ", response);
@@ -56,23 +56,11 @@ export default class MakePlaceScreen extends React.Component {
             }
         })
     }
-    registerMyPlace = async()=>{
-        await registerPlace(this.state.id_user,this.state.address,
-            this.state.namePlace,this.state.inisialPlace).then(()=>{
-                if (responseRegPlace.status ==  true) {
-                    Alert.alert ("Good")
-                }else{
-                    this.setState({
-                        inisial : 0
-                    })
-                }
-            })
-    }
     sendData = async () => {
         Alert.alert(JSON.stringify(this.state.image))
-        await imageUpload(this.state.image).then(res => {
+        await imageUpload(this.props.navigation.state.params.id_place,this.state.image).then(res => {
             if(responseData.status == true){ 
-                Alert.alert('Ok')
+                Alert.alert("Upload Success")
             }
             else if(responseData.status == false) Alert.alert("Upload gagal");
         
@@ -80,16 +68,12 @@ export default class MakePlaceScreen extends React.Component {
 
     }
     render = () => {
-        return <MakePlaceScreenView
-        inisialStatus ={this.state.inisial} 
-        namePlaceChange={namePlace => this.setState({namePlace})}
-        addressPlaceChange = {address => this.setState({address})}
-        inisialPlace={inisialPlace => this.setState({inisialPlace})}
-        sendData={()=>this.sendData()}
-        regPlace={()=>this.registerMyPlace()}
-        selectPhoto={()=>this.selectPhoto()}
-        image={this.state.imageSource}
-        onPressCreate={()=> this.create()}/>
+        return <AddImagePlaceScreenView
+        selectPhoto = {()=> this.selectPhoto()}
+        sendData = {()=> this.sendData()}
+        Alert = {() => this.Alert()}
+        imageSource = {this.state.imageSource}
+        />
     }
 
 

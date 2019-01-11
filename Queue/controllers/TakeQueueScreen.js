@@ -25,7 +25,8 @@ export default class TakeQueueScreen extends React.Component {
         this.setState({
             id: navigation.getParam('id_place', ''),
             name: navigation.getParam('name_place', ''),
-            alamat : navigation.getParam('address', '')
+            alamat : navigation.getParam('address', ''),
+            picture : navigation.getParam('picture', '')
         });
         AsyncStorage.getItem("id_user",(error,result)=>{
             this.setState({
@@ -43,7 +44,8 @@ export default class TakeQueueScreen extends React.Component {
                     name_place : this.props.navigation.state.params.name,
                     address : this.props.navigation.state.params.alamat,
                     id : this.props.navigation.state.params.id,
-                    kode : responsData.data
+                    kode : responsData.data,
+                    picture : this.props.navigation.state.params.picture
                 });
         
             } else {
@@ -57,14 +59,12 @@ export default class TakeQueueScreen extends React.Component {
         await getSisaAntrean(this.props.navigation.state.params.id).then(()=>{
             this.setState({sisa : responseSisa.data})
         })
-        Alert.alert(this.state.sisa)
     }
     getKode = async() =>{
         await getOnProcessKode(this.props.navigation.state.params.id)
         .then(res=>{
             this.setState({kode : responseKode.data});
         });
-        Alert.alert(this.state.kode)
     }
     back = async () => {
         this.props.navigation.goBack(null);
@@ -74,6 +74,7 @@ export default class TakeQueueScreen extends React.Component {
         return <TakeQueueScreenView
             onPressTake={()=>this.take()}
             id = {this.props.navigation.state.params.id}
+            picture = {this.props.navigation.state.params.picture}
             alamat = {this.props.navigation.state.params.alamat}
             name = {this.props.navigation.state.params.name} 
             sisa = {this.state.sisa}

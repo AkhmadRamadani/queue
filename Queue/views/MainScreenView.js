@@ -28,7 +28,7 @@ export default class MainScreenView extends Component {
                             height={7 * AppConstants.ActiveTheme.AppObjectSpacing}
                             />
                     </View>
-                    <View style={{flex : 0.48, alignItems : 'flex-end',justifyContent : "flex-start",
+                    <View style={{flex : 0.45, alignItems : 'flex-end',justifyContent : "flex-start",
                             marginRight : 16, marginBottom : 10}}>
                             <TouchableOpacity activeOpacity ={0.5} 
                                               onPress={()=>this.props.onPressSearch()}>
@@ -40,10 +40,13 @@ export default class MainScreenView extends Component {
                             </TouchableOpacity>
                     </View>
                 </View>
-                    <FlatListNew data={this.props.data} sisaAntrean={this.props.sisaAntrean}
+                <View style={{flex : 1}}>
+                    <FlatListNew 
+                        _onRefresh={this.props._onRefresh} refreshing={this.props.refreshing}
+                        data={this.props.data} sisaAntrean={this.props.sisaAntrean}
                         onPress={()=>this.props.onPressClick()}
                         onItemClick={(params) => this.props.onItemClick(params)} />
-                
+                </View>
                 </View>
     }
 }

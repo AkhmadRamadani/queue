@@ -72,7 +72,7 @@ export default class ReviewScreenView extends Component {
                         <View style={{ borderBottomWidth: 2, borderBottomColor: '#EDEDED' }}>
                             <Text style={{ fontWeight: "bold", fontSize: 15, padding: 1 * AppConstants.ActiveTheme.AppObjectSpacing }}>Tanggal</Text>
                             <Text style={{ fontSize: 15, padding: 1 * AppConstants.ActiveTheme.AppObjectSpacing,
-                                 padding: 1 * AppConstants.ActiveTheme.AppObjectSpacing }}>8 Januari 2019</Text>
+                                 padding: 1 * AppConstants.ActiveTheme.AppObjectSpacing }}>{this.props.now}</Text>
                         </View>
                         <View style={{ borderBottomWidth: 2, borderBottomColor: '#EDEDED' }}>
                             <Text style={{ fontWeight: "bold", fontSize: 15, padding: 1 * AppConstants.ActiveTheme.AppObjectSpacing }}>Kode Antrian</Text>

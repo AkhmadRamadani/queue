@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, Text } from 'react-native';
 import { GlobalStyles } from '../assets/GlobalStyles';
 import { AppConstants } from "../systems/Constants";
 import TextLine from './components/TextLine';
@@ -39,7 +39,16 @@ export default class FirstScreenView extends Component {
                     onChangeText={this.props.passChange}
                     radius={AppConstants.ActiveTheme.AppObjectSpacing}
                     secureMode={true} />
-                    
+                {(()=>{
+                    if (this.props.onLogin == 0) {
+                        return(    
+                        <View style={{marginVertical : 16,flex : 0.2, justifyContent : "center", alignItems : "center"}}>
+                            <Text>Password atau Email anda salah </Text>
+                            <Text>Silahkan Masukkan data Anda kembali</Text>
+                        </View>
+                        )   
+                    }
+                })()}
                 <View style={{ marginTop : 2 * AppConstants.ActiveTheme.AppObjectSpacing,
                             justifyContent : "flex-start", alignItems:"center"}}>
                     <Button

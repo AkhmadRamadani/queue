@@ -15,7 +15,6 @@ export default class LoginScreen extends React.Component {
             id_user : '',
             name : '',
             photoprofile : '',
-            
             password: "",
             
         }
@@ -52,7 +51,9 @@ export default class LoginScreen extends React.Component {
     loginHandler = async () => {
         await loginFunc(this.state.email,this.state.password).then(res=>{
             if (responsData.status == false){
-                Alert.alert('Failed Login');
+                this.setState({
+                    onLogin : 0
+                })
             }else if(responsData.status == true){
                 this.setState({
                 id_user : responsData.data.id_user,
@@ -81,7 +82,8 @@ export default class LoginScreen extends React.Component {
     }
 
     render = () => {
-        return <FirstScreen     
+        return <FirstScreen 
+            onLogin = {this.state.onLogin}    
             onPress={()=> this.loginHandler()} 
             emailChange={email => this.setState({email})}
             passChange = {password => this.setState({password})}

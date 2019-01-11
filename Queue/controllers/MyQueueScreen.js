@@ -10,11 +10,17 @@ export default class MyQueueScreen extends React.Component {
         super(props);
 
         this.state = {
+            refreshing : false
         }
 
         this.content = [];
     }
-    
+    _onRefresh = () => {
+        this.setState({refreshing: true});
+        this.getMyQueueList().then(() => {
+          this.setState({refreshing: false});
+        });
+    }
     componentWillMount () {
         AsyncStorage.getItem("id_user" ,(error, result)=>{
             this.setState({
@@ -35,9 +41,10 @@ export default class MyQueueScreen extends React.Component {
     }
     onItemClick = async ( params ) => {
         this.props.navigation.push( "Review",params)
+        this._onRefresh();
     }
     render = () => {
-        return <MyQueueScreenView data = {this.state.data}
+        return <MyQueueScreenView refreshing={this.state.refreshing} _onRefresh = {this._onRefresh} data = {this.state.data}
         onItemClick={(params) => this.onItemClick(params)}/>
     }
 

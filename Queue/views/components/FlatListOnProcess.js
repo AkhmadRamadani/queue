@@ -1,30 +1,27 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity , FlatList, StyleSheet,View, Image,Dimensions, RefreshControl} from 'react-native';
+import { Text, TouchableOpacity , FlatList, StyleSheet,View, RefreshControl,Image,Dimensions} from 'react-native';
 import ImageView from './ImageView';
 import TextLine from './TextLine';
 import Button from './Button';
-import { AppConstants } from '../../systems/Constants';
-export default class flatListNew2 extends React.Component{
+export default class FlatListNew extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            refreshing : false
         }
     }
-    
     render =()=>{
         return(
             <View>
                 <FlatList
-                data = {this.props.data}
+                data = {this.props.dataOn}
                 showsVerticalScrollIndicator= {false}
                 renderItem={({item}) => 
                 <View style={[styles.container,this.props.style]}>
-                    <Image source={{uri :  "http://192.168.43.2/apiqueue/v1/"+ item.picture}} style={[styles.photo,this.props.style]}/>
+                    <ImageView imageSrc={this.props.imageSrc} style={[styles.photo,this.props.style]}/>
                     <View style={[styles.container_text,this.props.style]}>
-                        <TextLine style={[styles.title,this.props.style]} label={item.name_place}>
+                        <TextLine style={[styles.title,this.props.style]} label={item.queue_code}>
                         </TextLine>
-                        <TextLine style={[this.props.style,styles.description]} label={item.queue_code}>
+                        <TextLine style={[this.props.style,styles.description]} label={item.name}>
                         </TextLine>
                     </View>
                     <View style={{
@@ -35,15 +32,16 @@ export default class flatListNew2 extends React.Component{
                                 width ={30}
                                 radius={20}
                                 onPress={() => this.props.onItemClick(
-                                    {
-                                        name_place : item.name_place,
+                                    {   
+                                        id : item.id_user,
+                                        photoprofile : item.photoprofile,
                                         kode : item.queue_code,
-                                        address : item.address
+                                        name : item.name
                                     }
-                                )}                
+                                )}  
                                 style={{
                                     alignItems : 'center',
-                                    backgroundColor : AppConstants.ActiveTheme.AppMainButtonColor
+                                    backgroundColor : '#1C3144'
 
                                 }}></Button>
                     </View>
@@ -61,6 +59,8 @@ export default class flatListNew2 extends React.Component{
 const styles = StyleSheet.create({
     container: {
         flex : 1,
+        width : Dimensions.get('window').width - (50),
+        height : Dimensions.get('window').height/6,
         flexDirection: 'row',
         padding: 10,
         marginLeft:16,
@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
     },
     photo: {
-        width : Dimensions.get('window').width / 3,
-        height : Dimensions.get('window').height/ 10,
-        borderRadius : 5
+        height: 50,
+        width: 50,
+        borderRadius : 50
     },
 });

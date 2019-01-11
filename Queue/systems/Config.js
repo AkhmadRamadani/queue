@@ -24,6 +24,8 @@ import ImageView from '../views/components/ImageView'
 import SplashScreen from '../controllers/SplashScreen';
 import ReviewScreen from "../controllers/ReviewScreen";
 import SearchScreen from "../controllers/SearchScreen";
+import DoneScreen from "../controllers/DoneScreen";
+import AddImagePlaceScreen from "../controllers/AddImagePlaceScreen";
 // ********************************************************************************
 // * APP Config
 // ********************************************************************************
@@ -186,10 +188,22 @@ export const MainDrawer = (auth) => {
                 navigationOptions : {
                     header : null
                 }
+            },
+            selesai : {
+                screen : DoneScreen,
+                navigationOptions : {
+                    header : null
+                }
+            },
+            AddImage : {
+                screen : AddImagePlaceScreen,
+                navigationOptions : {
+                    header : null
+                }
             }
         }, {    
                 disableOpenGesture: true,
-                initialRouteName: "Splash"
+                initialRouteName: "Second"
             })
     )
 }

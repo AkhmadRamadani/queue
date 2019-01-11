@@ -38,7 +38,7 @@ export default class MyQueueScreenView extends Component {
             <ScrollView 
                 showsVerticalScrollIndicator= {false}>
                 
-                <FlatListNew data={this.props.data}  onItemClick={(params) => this.props.onItemClick(params)}
+                <FlatListNew refreshing={this.props.refreshing} _onRefresh={this.props._onRefresh} data={this.props.data}  onItemClick={(params) => this.props.onItemClick(params)}
                 imageSrc={require('../assets/images/images.png')}></FlatListNew>
             </ScrollView>
         </View>

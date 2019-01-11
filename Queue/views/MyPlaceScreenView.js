@@ -1,77 +1,91 @@
 import React, { Component } from 'react';
 import CardView from 'react-native-cardview';
-import { View, Dimensions, Text, Alert } from 'react-native';
+import { View, Dimensions, Text, Alert , TouchableOpacity} from 'react-native';
 import { GlobalStyles } from '../assets/GlobalStyles';
 import { AppConstants } from "../systems/Constants";
 import TextLine from './components/TextLine';
 import ImageView from './components/ImageView';
 import FlatList from './components/FlatListNew';
+import FlatListOn from './components/FlatListOnProcess';
 import { ScrollView } from 'react-native-gesture-handler';
 import Button from './components/Button';
 import { Menu,MenuProvider,MenuOption,MenuOptions,MenuTrigger } from "react-native-popup-menu";
 export default class MyPlaceScreenView extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            kondisi : 1
+        };
     }
 
     render() {
         if (this.props.statusPlaceData == false) {
-            return <View style={[GlobalStyles.Wrapper,{backgroundColor : 'blue'}]}>
-                    <View style={{justifyContent:"center", alignItems:"center", 
-                    borderBottomWidth: 2, borderBottomColor: '#EDEDED', flex : 1, flexDirection : "row"}}>
-                        <ImageView
+            return <View style={[GlobalStyles.Wrapper]}>
+                    <View style ={{ width : Dimensions.get("window").width,
+                                    height : Dimensions.get("window").height/10, paddingVertical : 3 ,
+                                    borderBottomWidth : 2, borderBottomColor : "#ededed"}}>
+                        <View style={{ flex : 1,flexDirection : "row",
+                                    width : Dimensions.get("window").width, 
+                                    height : Dimensions.get("window").height/12.5 , alignContent :'center',
+                                    justifyContent : 'center', alignItems :'flex-start'}}>
+                           <ImageView
                             imageSrc={require('../assets/images/myplace.png')}
                             width={Dimensions.get('window').width / 3}
-                            height={7 * AppConstants.ActiveTheme.AppObjectSpacing}/>
+                            height={7 * AppConstants.ActiveTheme.AppObjectSpacing}
+                            />
+                        </View>
                     </View>
-                    <View style={{flex : 1, justifyContent : 'center', alignItems : 'center'}}>
+                    
+                    <View style={{ flex: 1, justifyContent: "center", alignItems: "center", marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing }}>
                         <Text style={{ fontSize: 20 }}>Anda belum mendaftarkan tempat</Text>
                         <Text style={{ fontSize: 20 }}>Klik My Profile -> Tambah tempat</Text>
                         <Text style={{ fontSize: 20 }}>dan isi data tempat anda</Text>
                     </View>
                 </View>
-        }else {
+        }else if (this.props.statusPlaceData != false){
         return <View>
-            <View style={{borderBottomWidth: 2, borderBottomColor: '#EDEDED', flexDirection : "row"}}>
-                <View style = {{flex : 0.4, padding : 5,paddingTop : 10, justifyContent : 'center',
-                            alignItems : "flex-start"}}>
-                    <MenuProvider style={{ flex : 1}}>
-                        <Menu onSelect={value => Alert.alert(`You Clicked : ${value}`)}>
-                            <MenuTrigger>
-                                <ImageView  imageSrc={require('../assets/images/3dots.png')}
-                                            width ={25}
-                                            height = {25}>
-                                </ImageView>
-                            </MenuTrigger>
-                            <MenuOptions>
-                                <MenuOption value={"Login"} style={{flex : 1}}>   
-                                    <Text style={{color: "#000",
-                                            fontWeight: "bold",
-                                            padding: 2,
-                                            fontSize: 20}}>Login
-                                    </Text>
-                                </MenuOption>
-                            </MenuOptions>
-                        </Menu>
-                    </MenuProvider>
+            <View style={{height : Dimensions.get('window').height/ 10,
+                        flexDirection : 'row',borderBottomWidth: 2, justifyContent : 'center',borderBottomColor: '#EDEDED'}}>
+                    <View style={{flex : 0.225, alignItems : 'flex-start',justifyContent : "flex-start",
+                            marginLeft : 16, marginBottom : 10}}>
+                            <TouchableOpacity activeOpacity ={0.5} 
+                                              onPress={()=>this.props.onPressProcess()}>
+                                <ImageView
+                                    imageSrc={require('../assets/images/refresh.png')}
+                                    width={Dimensions.get('window').width / 14}
+                                    height={Dimensions.get('window').height / 10}
+                                    />
+                            </TouchableOpacity>
+                    </View>
+                    <View style={{flex : 1, alignItems : "center"}}>
+                        <ImageView
+                            imageSrc={require('../assets/images/myplace.png')}
+                            width={Dimensions.get('window').width / 3}
+                            height={7 * AppConstants.ActiveTheme.AppObjectSpacing}
+                            />
+                    </View>
+                    <View style={{flex : 0.225, alignItems : 'flex-end',justifyContent : "flex-start",
+                            marginRight : 16, marginBottom : 10}}>
+                            <TouchableOpacity activeOpacity ={0.5} 
+                                              onPress={()=>this.props.settings()}>
+                                <ImageView
+                                    imageSrc={require('../assets/images/settings.png')}
+                                    width={Dimensions.get('window').width / 14}
+                                    height={Dimensions.get('window').height / 10}
+                                    />
+                            </TouchableOpacity>
+                    </View>
                 </View>
-                <View style={{flex : 1 , justifyContent : "center", 
-                alignItems : "flex-start"}}>
-                    <ImageView
-                        imageSrc={require('../assets/images/myplace.png')}
-                        width={Dimensions.get('window').width / 3}
-                        height={7 * AppConstants.ActiveTheme.AppObjectSpacing}/>
-                </View>
-            </View>
             <ScrollView 
                 showsVerticalScrollIndicator= {false}>
             <View style={{ 
                 justifyContent: 'center',
-                alignItems: 'center', marginTop: Dimensions.get('window').height / 10, marginBottom : 16}}>
+                alignItems: 'center', flex : 1, 
+                marginBottom : Dimensions.get("window").width/ 4}}>
                 
                 <CardView
-                    style={{cardElevation : 1,padding: 1 * AppConstants.ActiveTheme.AppObjectSpacing, marginTop : 8}}
+                    style={{cardElevation : 1,padding: 1 * AppConstants.ActiveTheme.AppObjectSpacing,
+                            marginTop : 16, marginBottom : 4}}
                     width={Dimensions.get('window').width - (4 * AppConstants.ActiveTheme.AppObjectSpacing)}
                     height={AppConstants.ActiveTheme.AppInputHeightDefault + (6 * AppConstants.ActiveTheme.AppObjectSpacing)}
                     cardElevation={2}
@@ -82,10 +96,100 @@ export default class MyPlaceScreenView extends Component {
                         <Text style={{ marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing, fontSize: 15 }}>{this.props.address}</Text>
                         <Text style={{ fontSize: 15 }}>Jumlah Antrean : {this.props.sisa}</Text>
                     </View>
+                    <View style={{flex : 1,justifyContent : 'flex-end', 
+                        alignItems : 'flex-end'}}>
+                        <TouchableOpacity activeOpacity ={0.6} onPress={this.props.refreshDataPress}>
+                            <ImageView
+                                imageSrc={require('../assets/images/update.png')}
+                                width={Dimensions.get("window").width / 13}
+                                height = {Dimensions.get("window").height / 18}>
+                            </ImageView>
+                        </TouchableOpacity>
+                    </View>
                 </CardView>
-                <FlatList onItemClick={(params) => this.props.onItemClick(params)}
-                            imageSrc={require('../assets/images/user.png')}
-                          data={this.props.data}></FlatList>
+                <CardView style={{cardElevation : 1,padding: 1 * AppConstants.ActiveTheme.AppObjectSpacing,
+                            marginTop : 4, marginBottom : 8}}
+                    width={Dimensions.get('window').width - (4 * AppConstants.ActiveTheme.AppObjectSpacing)}
+                    height={AppConstants.ActiveTheme.AppInputHeightDefault}
+                    cardElevation={2}
+                    cardMaxElevation={1}
+                    cornerRadius={5}>
+                    <View style={{flex : 1, flexDirection : 'row', justifyContent :'center', alignItems : 'center'}}>
+                        
+                        <View style={{flex : 1, justifyContent :'center', alignItems : 'center'}}>
+                            <TouchableOpacity activeOpacity ={0.6} onPress={()=>{
+                                this.setState({
+                                    kondisi : 1
+                                }),this.props.refreshDataPress
+                            }}>
+                                <ImageView
+                                    imageSrc={require('../assets/images/antri.png')}
+                                    width={Dimensions.get("window").width / 13}
+                                    height = {Dimensions.get("window").height / 18}>
+                                </ImageView>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{flex : 1, justifyContent :'center', alignItems : 'center'}}>
+                            <TouchableOpacity activeOpacity ={0.6} onPress={()=>{
+                                this.setState({
+                                    kondisi : 2
+                                }),this.props._onRefresh2
+                            }}>
+                                <ImageView
+                                    imageSrc={require('../assets/images/onproses.png')}
+                                    width={Dimensions.get("window").width / 13}
+                                    height = {Dimensions.get("window").height / 18}>
+                                </ImageView>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{flex : 1, justifyContent :'center', alignItems : 'center'}}>
+                            <TouchableOpacity activeOpacity ={0.6} onPress={()=>{
+                                this.setState({
+                                    kondisi : 3
+                                }),this.props._onRefreshDone
+                            }}>
+                                <ImageView
+                                    imageSrc={require('../assets/images/done.png')}
+                                    width={Dimensions.get("window").width / 13}
+                                    height = {Dimensions.get("window").height / 18}>
+                                </ImageView>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </CardView>
+                {(()=>{
+                    if (this.state.kondisi == 1) {
+                        return(
+                            <View style={{flex : 1}}>
+                                <FlatList   _onRefresh={this.props._onRefresh}
+                                refreshing = {this.props.refreshing}
+                                onItemClick={(params) => this.props.onItemClick(params)}
+                                imageSrc={require('../assets/images/user.png')}
+                                data={this.props.data}></FlatList>
+                            </View>
+                        )
+                    }else if (this.state.kondisi == 2) {
+                        return(
+                            <View style={{flex : 1}}>
+                                <FlatList _onRefresh={this.props._onRefresh2}
+                                refreshing = {this.props.refreshing}
+                                onItemClick={(params) => this.props.onItemClick(params)}
+                                imageSrc={require('../assets/images/user.png')}
+                                data={this.props.dataOn}></FlatList>
+                            </View>
+                        )
+                    }else if (this.state.kondisi == 3) {
+                        return(
+                            <View style={{flex : 1}}>
+                                <FlatList _onRefresh={this.props._onRefreshDone}
+                                refreshing = {this.props.refreshing}
+                                onItemClick={(params) => this.props.onItemClick(params)}
+                                imageSrc={require('../assets/images/user.png')}
+                                data={this.props.dataDone}></FlatList>
+                            </View>
+                        )
+                    }
+                })()}
             </View>
             </ScrollView>
         </View>

@@ -7,6 +7,7 @@ export default class ReviewScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            thisDay : '',
         }
 
         this.content = [];
@@ -36,6 +37,7 @@ export default class ReviewScreen extends React.Component {
             name_place: navigation.getParam('name_place', ''),
             address: navigation.getParam('address', ''),
         });
+        this.showCurrentDate();
     }
     hapusData= () =>{
         Alert.alert(
@@ -47,6 +49,22 @@ export default class ReviewScreen extends React.Component {
             },
             {text: 'Tidak', style : 'cancel'},
         ],)
+    }
+    showCurrentDate (){
+        day = new Date().getDay();
+        date = new Date().getDate();
+        month = new Date().getMonth();
+        year = new Date().getFullYear();
+        var days = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+        var thisDay = days[day];
+        var months    = ['January','February','March','April','May','June',
+                        'July','August','September','October','November','December'];
+        var thisMonth = months[month];
+        var now = (thisDay + ' ' + date + ' / '+ thisMonth + ' / ' + year )
+        this.setState({
+            day : now
+        })
+
     }
     cancel = async ()=> {
         await cancellingQueue(this.props.navigation.state.params.kode).then(()=>{
@@ -61,6 +79,7 @@ export default class ReviewScreen extends React.Component {
     }
     render = () => {
         return <ReviewScreenView
+            now = {this.state.day}
             name_place = {this.props.navigation.state.params.name_place}
             address = {this.props.navigation.state.params.address}
             id = {this.props.navigation.state.params.id}
