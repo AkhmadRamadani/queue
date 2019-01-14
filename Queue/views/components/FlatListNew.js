@@ -17,6 +17,14 @@ export default class FlatListNew extends React.Component{
                 data = {this.props.data}
                 showsVerticalScrollIndicator= {false}
                 renderItem={({item}) => 
+                <TouchableOpacity onPress={() => this.props.onItemClick(
+                    {   
+                        id : item.id_user,
+                        photoprofile : item.photoprofile,
+                        kode : item.queue_code,
+                        name : item.name
+                    }
+                )}  >
                 <View style={[styles.container,this.props.style]}>
                     <ImageView imageSrc={{uri : "http://192.168.43.2/apiqueue/v1/"+ item.photoprofile}} style={[styles.photo,this.props.style]}/>
                     <View style={[styles.container_text,this.props.style]}>
@@ -33,20 +41,21 @@ export default class FlatListNew extends React.Component{
                                 width ={30}
                                 radius={20}
                                 onPress={() => this.props.onItemClick(
-                                    {   
-                                        id : item.id_user,
-                                        photoprofile : item.photoprofile,
+                                    {
+                                        name_place : item.name_place,
                                         kode : item.queue_code,
-                                        name : item.name
+                                        address : item.address
                                     }
-                                )}  
+                                )} 
                                 style={{
                                     alignItems : 'center',
                                     backgroundColor : AppConstants.ActiveTheme.AppMainButtonColor
 
                                 }}></Button>
                     </View>
-                </View>}keyExtractor={(item,index) => item.id_queue}
+                </View>
+                
+                </TouchableOpacity>}keyExtractor={(item,index) => item.id_queue}
                 refreshControl={
                     <RefreshControl
                         refreshing={this.props.refreshing}

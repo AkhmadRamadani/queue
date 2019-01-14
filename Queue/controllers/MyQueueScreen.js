@@ -32,6 +32,7 @@ export default class MyQueueScreen extends React.Component {
     getMyQueueList = async () => {
         await getMyQueue(parseInt(this.state.id_user)).then(()=>{
             this.setState({data : responsData.data,
+                status : responsData.status,
                 id_queue : responsData.data.id_queue,
                 name_place : responsData.data.name_place,
                 address : responsData.data.address,
@@ -44,8 +45,9 @@ export default class MyQueueScreen extends React.Component {
         this._onRefresh();
     }
     render = () => {
-        return <MyQueueScreenView refreshing={this.state.refreshing} _onRefresh = {this._onRefresh} data = {this.state.data}
-        onItemClick={(params) => this.onItemClick(params)}/>
+        return <MyQueueScreenView refreshing={this.state.refreshing} _onRefresh = {()=>this._onRefresh()} data = {this.state.data}
+        onItemClick={(params) => this.onItemClick(params)}
+        status = {this.state.status}/>
     }
 
 

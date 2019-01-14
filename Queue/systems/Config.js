@@ -25,6 +25,7 @@ import SplashScreen from '../controllers/SplashScreen';
 import ReviewScreen from "../controllers/ReviewScreen";
 import SearchScreen from "../controllers/SearchScreen";
 import DoneScreen from "../controllers/DoneScreen";
+import AllPlaceScreen from "../controllers/AllPlaceScreen";
 import AddImagePlaceScreen from "../controllers/AddImagePlaceScreen";
 // ********************************************************************************
 // * APP Config
@@ -60,8 +61,8 @@ const tabNavigator = createBottomTabNavigator({
                 ),
             }
         },
-        MyPlace : {
-            screen : MyPlaceScreen,
+        AllPlaceScreen : {
+            screen : AllPlaceScreen,
             navigationOptions:{
                 tabBarIcon: ({})=>(
                     <ImageView
@@ -200,10 +201,16 @@ export const MainDrawer = (auth) => {
                 navigationOptions : {
                     header : null
                 }
+            },
+            MyPlace : {
+                screen : MyPlaceScreen,
+                navigationOptions : {
+                    header : null
+                }
             }
         }, {    
                 disableOpenGesture: true,
-                initialRouteName: "Second"
+                initialRouteName: "Splash"
             })
     )
 }

@@ -7,6 +7,7 @@ import ImageView from './components/ImageView';
 import Button from './components/Button';
 import { Card } from 'react-native-elements';
 import CardView from 'react-native-cardview';
+import { ScrollView } from 'react-native-gesture-handler';
  
 export default class TakeQueueScreenView extends Component {
     constructor(props) {
@@ -22,15 +23,10 @@ export default class TakeQueueScreenView extends Component {
 
             <View style = {{ alignItems : 'center'}}>
                 <View style={{marginBottom : Dimensions.get("window").height /64}}>
-                    <ImageBackground
-                        source={{uri : this.props.picture}}
-                        style={{width : Dimensions.get('window').width,
-                                height : Dimensions.get('window').height/3}}
-                        >
-                         <View style={{ flexDirection:"row", 
+                <View style={{ flexDirection:"row", 
                            justifyContent:"flex-start", 
                            alignItems:"center", 
-                           backgroundColor : 'rgba(255,255,255,0.5)'}}>
+                           backgroundColor : 'rgba(255,255,255,0.7)'}}>
                             <TouchableOpacity onPress={()=>this.props.onPressBack()}>
                                 <View>
                                     <ImageView
@@ -49,7 +45,13 @@ export default class TakeQueueScreenView extends Component {
                                     height={7 * AppConstants.ActiveTheme.AppObjectSpacing}
                                     />
                             </View>                
-                        </View>      
+                        </View>
+                    <ImageBackground
+                        source={{uri : this.props.picture}}
+                        style={{width : Dimensions.get('window').width,
+                                height : Dimensions.get('window').height/3}}
+                        >
+                               
                     </ImageBackground>
                 </View>
                 <View style = {{width : Dimensions.get('window').width - ( 20),
@@ -67,7 +69,7 @@ export default class TakeQueueScreenView extends Component {
                                     OPEN
                                 </Text>
                         </View>
-                        <Text>Jam Buka Tergantung Pemilik Toko</Text>
+                        <Text>Jam Buka Tergantung Pemilik Tempat</Text>
                     </View>
                 </View>
                 <View>

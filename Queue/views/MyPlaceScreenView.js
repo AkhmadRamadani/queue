@@ -14,7 +14,8 @@ export default class MyPlaceScreenView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            kondisi : 1
+            kondisi : 1,
+            status : 0,
         };
     }
 
@@ -91,6 +92,42 @@ export default class MyPlaceScreenView extends Component {
                     cardElevation={2}
                     cardMaxElevation={1}
                     cornerRadius={5}>
+                    {(()=>{
+                        if (this.props.status == 'open') {
+                            return (
+                                <View style={{flex :1 ,justifyContent : 'flex-start', 
+                                alignItems :'flex-start'}}>
+                                    <TouchableOpacity onPress={this.props.closePlace}>
+                                        <View style={{width : 56, height : 24, justifyContent : 'center', alignItems : 'center', 
+                                                backgroundColor :'#2ecc71',
+                                                borderRadius : 12, marginRight : 8}}>
+                                                    <Text style = {{color : '#fff'}}>
+                                                        OPEN
+                                                    </Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        }else if(this.props.status == 'close'){
+                            return(
+                                <View style={{flex :1 ,justifyContent : 'flex-start', 
+                                alignItems :'flex-start'}}>
+                                    <TouchableOpacity onPress={this.props.openPlace}>
+                                        <View style={{width : 56, height : 24, justifyContent : 'center', alignItems : 'center', 
+                                                backgroundColor :'#e74c3c',
+                                                borderRadius : 12, marginRight : 8}}>
+                                                    <Text style = {{color : '#fff'}}>
+                                                        CLOSE
+                                                    </Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                            
+                        }
+                    })()}
+                   
+                    
                     <View style={{justifyContent: "center", alignItems: "center"}}>
                         <Text style={{ fontWeight: "bold", fontSize: 18 }}>{this.props.name}</Text>
                         <Text style={{ marginTop: 2 * AppConstants.ActiveTheme.AppObjectSpacing, fontSize: 15 }}>{this.props.address}</Text>

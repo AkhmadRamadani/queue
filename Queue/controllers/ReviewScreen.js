@@ -55,7 +55,7 @@ export default class ReviewScreen extends React.Component {
         date = new Date().getDate();
         month = new Date().getMonth();
         year = new Date().getFullYear();
-        var days = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+        var days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
         var thisDay = days[day];
         var months    = ['January','February','March','April','May','June',
                         'July','August','September','October','November','December'];

@@ -60,7 +60,7 @@ export default class MakePlaceScreen extends React.Component {
         await registerPlace(this.state.id_user,this.state.address,
             this.state.namePlace,this.state.inisialPlace).then(()=>{
                 if (responseRegPlace.status ==  true) {
-                    Alert.alert ("Good")
+                    this.props.navigation.goBack();
                 }else{
                     this.setState({
                         inisial : 0

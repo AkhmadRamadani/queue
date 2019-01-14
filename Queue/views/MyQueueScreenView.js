@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, TouchableOpacity,Image ,Alert} from 'react-native';
 import { GlobalStyles } from '../assets/GlobalStyles';
 import { AppConstants } from "../systems/Constants";
 import TextLine from './components/TextLine';
@@ -34,13 +34,35 @@ export default class MyQueueScreenView extends Component {
                     width={Dimensions.get('window').width / 3}
                     height={7 * AppConstants.ActiveTheme.AppObjectSpacing}
                     />
-            </View>  
-            <ScrollView 
-                showsVerticalScrollIndicator= {false}>
-                
-                <FlatListNew refreshing={this.props.refreshing} _onRefresh={this.props._onRefresh} data={this.props.data}  onItemClick={(params) => this.props.onItemClick(params)}
-                imageSrc={require('../assets/images/images.png')}></FlatListNew>
-            </ScrollView>
+            </View>
+            <View style={{flex : 1}}>
+            {(()=>{
+                if (this.props.status == false) {
+                    return(
+                        <View style={{flex : 1, justifyContent : 'center',alignItems :'center'}}>
+                            <TextLine label={"Anda belum mengikuti antrian apapun"} 
+                                    style={{padding : 8}} type={'h5'}></TextLine>
+                            <TouchableOpacity onPress={this.props._onRefresh}>
+                                <Image  style={{width : 24, height : 24}}
+                                        source={require('../assets/images/refresh.png')}>
+
+                                </Image>
+                            </TouchableOpacity>
+                        </View>
+                    )
+                }else {
+                    return (
+                        <ScrollView 
+                            showsVerticalScrollIndicator= {false}>
+                            
+                            <FlatListNew refreshing={this.props.refreshing} _onRefresh={this.props._onRefresh} data={this.props.data}  onItemClick={(params) => this.props.onItemClick(params)}
+                            imageSrc={require('../assets/images/images.png')}></FlatListNew>
+                        </ScrollView>
+                    )
+                }
+            })()}
+            
+            </View>
         </View>
     }
 }

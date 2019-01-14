@@ -66,7 +66,7 @@ export default class TakeQueueScreen extends React.Component {
             this.setState({kode : responseKode.data});
         });
     }
-    back = async () => {
+    back  () {
         this.props.navigation.goBack(null);
     }
 

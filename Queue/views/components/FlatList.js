@@ -47,6 +47,7 @@ export default class FlatListComponent extends Component {
                                 alamat: item.address,
                                 name: item.name_place,
                                 id: item.id_place,
+                                status : item.status
                             }
                         )}>
                         <View style={{alignItems: 'center',

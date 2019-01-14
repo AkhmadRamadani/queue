@@ -2,7 +2,7 @@ import ProfileScreenView from '../views/ProfileScreenView'
 import {responsData, getMyPlace} from '../models/getMyPlace'
 
 import React from 'react';
-import {AsyncStorage} from "react-native";
+import {AsyncStorage,Alert} from "react-native";
 export default class ProfileScreen extends React.Component {
 
     constructor(props) {
@@ -31,6 +31,17 @@ export default class ProfileScreen extends React.Component {
         this.setState({
             content: con
         });
+    }
+    LogOut = async() =>{
+        Alert.alert("Logout","Anda Yakin ingin keluar ?",[
+            {text: 'Yakin', onPress: () => 
+                {
+                    AsyncStorage.clear(()=>{
+                        this.props.navigation.push("First");
+                    })}
+            },
+            {text: 'Tidak', style : 'cancel'},
+        ])
     }
     data (){
         AsyncStorage.getItem("name", (error,result) =>{
@@ -87,6 +98,7 @@ export default class ProfileScreen extends React.Component {
             havePlace = {this.state.havePlace}
             onPressSetting={() => this.sett()} 
             onPressMake={() => this.make()}
+            LogOut={() => this.LogOut()}
             name = {this.state.name}
             photoprofile = {this.state.photoprofile}
             email = {this.state.email}
